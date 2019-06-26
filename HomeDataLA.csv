@@ -1,0 +1,347 @@
+street,zipcode,city,useCode,taxAssessmentYear,taxAssessment,yearBuilt,lotSizeSqFt,finishedSqFt,bathrooms,bedrooms,amount,regionName,regionType
+17440 Nordhoff St,91325,Northridge,SingleFamily,2018,612620.0,1953,19487,2879,3.0,3,998508,Northridge,neighborhood
+13054 Woodbridge St,91604,Studio City,SingleFamily,2018,849024.0,1941,8712,1405,2.5,4,1533904,Studio City,neighborhood
+2023 W 28th St,90018,Los Angeles,Quadruplex,2018,198448.0,1926,6818,3596,4.0,4,986875,Jefferson Park,neighborhood
+2203 Eastlake Ave,90031,Los Angeles,SingleFamily,2018,34492.0,1926,3233,858,2.0,3,535658,Lincoln Heights,neighborhood
+11414 Cashmere St,90049,Los Angeles,SingleFamily,2018,1769493.0,1938,5250,2329,3.0,4,2297801,Brentwood,neighborhood
+7320 Mclaren Ave,91307,West Hills,SingleFamily,2018,113659.0,1960,7204,1350,2.0,4,603517,West Hills,neighborhood
+126 E 109th Pl,90061,Los Angeles,SingleFamily,2018,312120.0,1925,5323,1008,1.0,3,327968,Southeast Los Angeles,neighborhood
+7733 Shoup Ave,91304,Canoga Park,SingleFamily,2018,187408.0,1963,NA,NA,NA,3,625445,West Hills,neighborhood
+2481 Patricia Ave,90064,Los Angeles,SingleFamily,2018,397681.0,1928,6250,1813,4.0,4,1698983,Cheviot Hills,neighborhood
+1222 W 81st St,90044,Los Angeles,SingleFamily,2018,346800.0,1929,4081,1239,1.0,2,511108,South Los Angeles,neighborhood
+2909 7th Ave,90018,Los Angeles,Duplex,2018,345200.0,1910,7496,2063,3.0,6,852638,Jefferson Park,neighborhood
+7846 Boeing Ave,90045,Los Angeles,SingleFamily,2018,353508.0,1948,6310,1882,2.0,3,1163378,Westchester,neighborhood
+1101 W 38th St,90037,Los Angeles,Duplex,2018,39384.0,1912,7037,1963,2.0,4,813500,South Los Angeles,neighborhood
+316 N Las Palmas Ave,90004,Los Angeles,SingleFamily,2018,943732.0,1941,12532,5399,4.0,5,4346620,Mid Wilshire,neighborhood
+20618 S Western Ave,90501,Torrance,MultiFamily2To4,2018,780256.0,NA,NA,NA,NA,NA,1287307,Harbor Gateway,neighborhood
+10314 Beach St,90002,Los Angeles,SingleFamily,2018,51014.0,1974,5313,1188,2.0,3,372042,Watts,neighborhood
+5149 Bakman Ave,91601,North Hollywood,MultiFamily2To4,2018,485669.0,1962,12527,4828,8.0,8,1912327,North Hollywood,neighborhood
+7601 Linley Ln,91304,Canoga Park,SingleFamily,2018,904000.0,1978,10890,2449,3.0,4,976890,West Hills,neighborhood
+14555 Raven St,91342,Sylmar,SingleFamily,2018,72847.0,1951,7675,1169,1.0,3,486713,Sylmar,neighborhood
+1229 E 46th St,90011,Los Angeles,Triplex,2018,194169.0,1903,8331,1944,3.0,3,502576,Southeast Los Angeles,neighborhood
+6529 Brynhurst Ave,90043,Los Angeles,Duplex,2018,457851.0,1924,7640,2290,3.0,4,764880,Hyde Park,neighborhood
+2138 Camden Ave,90025,Los Angeles,SingleFamily,2018,525039.0,1923,6700,1932,3.0,4,1805829,West Los Angeles,neighborhood
+651 Oxford Ave,90291,Venice,SingleFamily,2018,2511687.0,2016,NA,2467,4.0,3,2880342,Venice,neighborhood
+5277 Elvira Rd,91364,Woodland Hills,SingleFamily,2018,775256.0,1993,9600,4335,4.0,4,1192447,Woodland Hills,neighborhood
+13855 Riverside Dr,91423,Sherman Oaks,Townhouse,2018,632400.0,1974,42431,1612,2.5,3,629549,Sherman Oaks,neighborhood
+300 S Highland Ave,90036,Los Angeles,SingleFamily,2018,1322970.0,1925,10478,4077,3.0,5,3030515,Mid Wilshire,neighborhood
+1221 Valrose Ct,90041,Los Angeles,SingleFamily,2018,394162.0,2015,10447,2002,3.0,3,1195755,Eagle Rock,neighborhood
+1949 S Durango Ave,90034,Los Angeles,SingleFamily,2018,2363922.0,1946,5594,3939,2.0,3,2858256,Beverlywood,neighborhood
+3148 Colby Ave,90066,Los Angeles,SingleFamily,2018,506164.0,1948,7315,2140,2.0,3,1952458,Mar Vista,neighborhood
+929 N Hobart Blvd,90029,Los Angeles,MultiFamily2To4,2018,928932.0,1941,7405,3319,4.0,6,1439907,Hollywood,neighborhood
+14838 Maple Ter,91402,Panorama City,SingleFamily,2018,207767.0,2018,NA,1550,3.0,2,524557,Panorama City,neighborhood
+2502 S Carolina St,90731,San Pedro,Quadruplex,2018,308132.0,1931,5477,2090,4.0,4,746690,San Pedro,neighborhood
+406 N Ardmore Ave,90004,Los Angeles,SingleFamily,2018,189199.0,1919,5280,1326,1.0,2,1077110,Hollywood,neighborhood
+123 S Irving Blvd,90004,Los Angeles,SingleFamily,2018,2826420.0,1921,12311,3534,4.0,5,3400920,Mid Wilshire,neighborhood
+13741 Bessemer St,91401,Van Nuys,SingleFamily,2018,661499.0,1956,6534,1948,3.0,4,785448,Valley Glen,neighborhood
+4435 Canoga Dr,91364,Woodland Hills,SingleFamily,2018,633381.0,1961,6688,1472,2.0,3,784241,Woodland Hills,neighborhood
+1343 Toomey Pl,90710,Harbor City,SingleFamily,2018,339009.0,1970,5734,1200,2.0,3,590440,Harbor City,neighborhood
+3713 Oak Hill Ave,90032,Los Angeles,SingleFamily,2018,22622.0,NA,7928,NA,NA,0,NA,El Sereno,neighborhood
+1708 E 3rd St,90033,Los Angeles,MultiFamily2To4,2018,425132.0,1890,1874,1676,3.0,4,516825,Central City East,neighborhood
+8326 Kenyon Ave,90045,Los Angeles,SingleFamily,2018,1143000.0,1945,5969,1518,2.0,4,1266345,Westchester,neighborhood
+6709 S Victoria Ave,90043,Los Angeles,SingleFamily,2018,29889.0,1937,2613,720,1.0,2,412609,Hyde Park,neighborhood
+4419 Turquoise St,90032,Los Angeles,SingleFamily,2018,85759.0,1923,6000,720,1.0,2,506414,Montecito Heights,neighborhood
+11740 San Vicente Blvd,90049,Los Angeles,SingleFamily,2018,2.2372464E7,1984,30677,65906,NA,0,NA,Brentwood,neighborhood
+13245 Rose Ave,90066,Los Angeles,SingleFamily,2018,747958.0,1953,7320,2834,4.0,4,2528481,Mar Vista,neighborhood
+1329 W 219th St,90501,Torrance,MultiFamily2To4,NA,NA,1941,NA,1500,2.25,3,600577,Harbor Gateway,neighborhood
+1032 Montego Dr,90049,Los Angeles,SingleFamily,2018,771289.0,1957,21226,2880,4.0,4,3198045,Bel Air,neighborhood
+5835 Winnetka Ave,91367,Woodland Hills,SingleFamily,2018,401970.0,1970,14810,2220,2.0,3,862153,Woodland Hills,neighborhood
+7645 Lasaine Ave,91325,Northridge,SingleFamily,2018,596000.0,1951,10624,2183,3.0,3,714958,Lake Balboa,neighborhood
+7044 Yarmouth Ave,91335,Reseda,SingleFamily,2018,275973.0,1949,6259,830,1.0,2,464671,Reseda,neighborhood
+3761 Somerset Dr,90016,Los Angeles,SingleFamily,2018,392266.0,1941,6011,1396,2.0,3,904908,Crenshaw,neighborhood
+10351 Arnwood Rd,91342,Sylmar,SingleFamily,2018,264260.0,1964,11000,2644,3.0,5,842764,Lakeview Terrace,neighborhood
+9555 Capistrano Ave,91311,Chatsworth,SingleFamily,2018,759783.0,1985,17962,4985,4.0,4,1261375,Chatsworth,neighborhood
+15120 Bestor Blvd,90272,Pacific Palisades,SingleFamily,2018,203702.0,1938,12363,2192,1.0,2,3547417,Pacific Palisades,neighborhood
+7503 Baird Ave,91335,Reseda,SingleFamily,2018,434000.0,1948,6239,864,1.0,2,464283,Reseda,neighborhood
+900 Chantilly Rd,90077,Los Angeles,SingleFamily,2018,4894918.0,1947,24377,2746,6.5,5,5137201,Bel Air,neighborhood
+4333 Agnes Ave,91604,Studio City,SingleFamily,2018,773813.0,1950,6751,1444,2.0,3,1251200,Studio City,neighborhood
+8000 Naylor Ave,90045,Los Angeles,SingleFamily,2018,383890.0,1942,6059,1419,2.0,3,1276299,Westchester,neighborhood
+11135 Cashmere St,90049,Los Angeles,SingleFamily,2018,701670.0,1931,7150,2647,6.0,4,2588527,Westwood,neighborhood
+5725 Elmer Ave,91601,North Hollywood,SingleFamily,2018,430946.0,NA,7467,NA,NA,NA,NA,North Hollywood,neighborhood
+7506 Topeka Dr,91335,Reseda,SingleFamily,2018,160296.0,1954,7203,1220,2.0,3,550425,Reseda,neighborhood
+631 E 80th St,90001,Los Angeles,SingleFamily,2018,204216.0,1928,5227,1004,1.0,2,407147,Southeast Los Angeles,neighborhood
+10336 Variel Ave,91311,Chatsworth,SingleFamily,2018,662925.0,1971,22499,2210,2.5,4,758724,Chatsworth,neighborhood
+1628 N Alvarado St,90026,Los Angeles,Duplex,2018,889004.0,1907,6000,2988,4.0,4,1320590,Echo Park,neighborhood
+17616 Gilmore St,91406,Van Nuys,SingleFamily,2018,534000.0,1950,6354,1113,1.0,3,611101,Lake Balboa,neighborhood
+6725 Costello Ave,91405,Van Nuys,SingleFamily,2018,226721.0,1949,8093,1590,2.0,2,699240,Valley Glen,neighborhood
+5903 Great Oak Cir,90042,Los Angeles,SingleFamily,2018,10326.0,NA,18198,NA,NA,NA,NA,Highland Park,neighborhood
+847 E 74th St,90001,Los Angeles,SingleFamily,2018,27050.0,1926,4947,1152,1.0,3,379568,Southeast Los Angeles,neighborhood
+5920 Barton Ave,90038,Los Angeles,MultiFamily2To4,NA,NA,NA,NA,700,1.0,1,1073622,Hollywood,neighborhood
+141 W 102nd St,90003,Los Angeles,SingleFamily,2018,18265.0,1923,4319,792,1.0,2,354129,Southeast Los Angeles,neighborhood
+6518 Quakertown Ave,91367,Woodland Hills,SingleFamily,2018,87853.0,1956,9165,1361,2.0,4,604271,Woodland Hills,neighborhood
+4552 College View Ave,90041,Los Angeles,SingleFamily,2018,754156.0,1925,13573,1394,2.0,3,948751,Eagle Rock,neighborhood
+8712 Wentworth St,91040,Sunland,SingleFamily,2018,338251.0,2006,6593,1742,3.0,3,682247,Sunland,neighborhood
+1929 Rome Dr,90065,Los Angeles,SingleFamily,2018,563343.0,1947,5911,1142,1.0,2,825590,Mount Washington,neighborhood
+1218 S Berendo St,90006,Los Angeles,Apartment,2018,633957.0,1889,7203,4003,5.0,3,NA,Harvard Heights,neighborhood
+2600 Ganahl St,90033,Los Angeles,SingleFamily,2018,354902.0,1924,7500,936,1.0,2,494108,Boyle Heights,neighborhood
+12800 Louvre St,91331,Pacoima,SingleFamily,2018,237663.0,1957,7559,1078,2.0,3,494257,Pacoima,neighborhood
+1630 Chastain Pkwy E,90272,Pacific Palisades,SingleFamily,2018,2408025.0,1991,9972,5040,4.5,4,3008199,Pacific Palisades,neighborhood
+3690 Percy St,90023,Los Angeles,Apartment,2018,93307.0,1929,10305,4590,8.0,10,NA,Boyle Heights,neighborhood
+7567 Mcconnell Ave,90045,Los Angeles,SingleFamily,2018,96259.0,1950,5906,1198,1.0,3,1238626,Westchester,neighborhood
+1411 Hazelwood Ave,90041,Los Angeles,SingleFamily,2018,791520.0,1929,7726,1282,1.0,3,896090,Highland Park,neighborhood
+7901 Beland Ave,90045,Los Angeles,SingleFamily,2018,1161889.0,1950,8140,1938,2.5,3,1428037,Westchester,neighborhood
+4852 Adele Ct,91364,Woodland Hills,SingleFamily,2018,942694.0,1963,18295,1981,3.0,3,1209503,Woodland Hills,neighborhood
+20235 Halsted St,91311,Chatsworth,SingleFamily,2018,77301.0,1957,7560,1368,2.0,3,589353,Chatsworth,neighborhood
+2805 Cincinnati St,90033,Los Angeles,Duplex,2018,220605.0,1924,3599,1696,2.0,4,578606,Boyle Heights,neighborhood
+14936 Napa St,91402,Panorama City,SingleFamily,2018,532440.0,1955,8712,1496,2.0,3,569375,Panorama City,neighborhood
+1924 W 37th Pl,90018,Los Angeles,SingleFamily,2018,153854.0,1921,4017,930,1.0,2,551675,South Los Angeles,neighborhood
+4301 S Flower St,90037,Los Angeles,Quadruplex,2018,40453.0,1913,5999,4104,4.0,2,712300,South Los Angeles,neighborhood
+3797 S Van Ness Ave,90018,Los Angeles,SingleFamily,2018,68026.0,1923,5131,1111,1.0,3,555924,South Los Angeles,neighborhood
+366 Comstock Ave,90024,Los Angeles,SingleFamily,2018,374505.0,1937,11913,4578,6.0,3,5252102,Westwood,neighborhood
+7441 Zelzah Ave,91335,Reseda,SingleFamily,2018,412770.0,1961,6534,1469,2.0,3,580331,Reseda,neighborhood
+13388 Newcomb Dr,91423,Sherman Oaks,SingleFamily,2018,832.0,NA,7206,NA,NA,0,NA,Sherman Oaks,neighborhood
+1296 W Jefferson Blvd,90007,Los Angeles,SingleFamily,NA,NA,NA,NA,NA,2.0,4,838706,South Los Angeles,neighborhood
+120 Monovale Dr,90210,Beverly Hills,SingleFamily,2018,6033270.0,2002,32543,1427,4.0,1,11159822,Beverly Crest,neighborhood
+801 W Imperial Hwy,90044,Los Angeles,SingleFamily,2018,61249.0,1930,8804,1142,1.0,2,428093,South Los Angeles,neighborhood
+801 N La Fayette Park Pl,90026,Los Angeles,Apartment,2018,262370.0,1930,7495,4568,5.0,6,NA,Silver Lake,neighborhood
+14702 Runnymede St,91405,Van Nuys,SingleFamily,2018,258416.0,1954,6005,1418,2.0,3,542745,Van Nuys,neighborhood
+7724 Graystone Dr,91304,Canoga Park,SingleFamily,2018,979320.0,1992,13418,5203,5.0,5,1374908,West Hills,neighborhood
+9174 Beachy Ave,91331,Arleta,SingleFamily,2018,188656.0,1955,9874,1180,2.0,3,503072,Arleta,neighborhood
+349 N Citrus Ave,90036,Los Angeles,SingleFamily,2018,1290213.0,1925,6750,1909,2.0,2,1800109,Mid Wilshire,neighborhood
+1733 E 60th St,90001,Los Angeles,SingleFamily,2018,73476.0,1922,3904,672,1.0,2,341676,Florence-Graham,city
+1714 N Beverly Glen Blvd,90077,Los Angeles,SingleFamily,2018,865796.0,1930,6965,1170,2.0,2,1205303,Beverly Glen,neighborhood
+10509 Woodbridge St,91602,Toluca Lake,SingleFamily,2018,901494.0,1930,6098,1638,2.0,3,1237227,Toluca Lake,neighborhood
+8301 Sedan Ave,91304,Canoga Park,Condominium,2018,69544.0,1973,6383,1404,2.0,3,591330,West Hills,neighborhood
+1857 Lemoyne St,90026,Los Angeles,Quadruplex,2018,1053488.0,1925,8023,2547,4.0,6,1363477,Echo Park,neighborhood
+262 W 14th St,90015,San Pedro,Duplex,2018,433500.0,1895,4809,1562,2.0,2,548441,Downtown,neighborhood
+1249 S Ogden Dr,90019,Los Angeles,SingleFamily,2018,516661.0,1935,7211,2307,2.0,3,1872344,Mid City,neighborhood
+2033 W 75th St,90047,Los Angeles,SingleFamily,2018,189094.0,1941,6702,1080,1.0,2,517119,South Los Angeles,neighborhood
+17126 Vose St,91406,Van Nuys,SingleFamily,2018,540600.0,1950,8276,1184,1.0,3,579892,Lake Balboa,neighborhood
+643 Radcliffe Ave,90272,Pacific Palisades,SingleFamily,2018,3027406.0,1949,11980,3973,4.0,4,4160255,Pacific Palisades,neighborhood
+511 San Pascual Ave,90042,Los Angeles,SingleFamily,2018,212378.0,1922,5351,973,1.0,2,681132,Highland Park,neighborhood
+7945 Aldea Ave,91406,Van Nuys,SingleFamily,2018,82261.0,1954,6909,1595,3.0,4,626713,Lake Balboa,neighborhood
+915 N La Brea Ave APT 352,90038,West Hollywood,MultiFamily5Plus,NA,NA,2016,NA,632,1.0,0,NA,Mid City West,neighborhood
+10964 Fullbright Ave,91311,Chatsworth,SingleFamily,2018,945723.0,1974,17511,3068,4.0,5,1000962,Chatsworth,neighborhood
+3441 Wonder View Dr,90068,Los Angeles,SingleFamily,2018,1590000.0,1937,7916,2643,3.0,3,2179535,Hollywood Hills,neighborhood
+1220 Las Lomas Ave,90272,Pacific Palisades,SingleFamily,2018,1463776.0,NA,18620,NA,2.5,NA,2643933,Pacific Palisades,neighborhood
+5612 Meridian St,90042,Los Angeles,SingleFamily,2018,170162.0,1940,2099,728,1.0,1,630012,Highland Park,neighborhood
+13216 Norris Ave,91342,Sylmar,SingleFamily,2018,544000.0,1969,7501,1602,2.0,4,544998,Sylmar,neighborhood
+6613 Enfield Ave,91335,Reseda,SingleFamily,2018,95658.0,1949,6645,1410,1.0,2,560740,Reseda,neighborhood
+913 W 79th St,90044,Los Angeles,Triplex,2018,355125.0,1912,5726,2184,3.0,5,602740,South Los Angeles,neighborhood
+3407 Dorchester Ave,90032,Los Angeles,SingleFamily,2018,209867.0,1939,4901,832,1.0,2,619862,El Sereno,neighborhood
+3806 Pacific Ave APT C,90292,Marina Del Rey,Apartment,NA,NA,NA,NA,650,1.0,1,NA,Venice,neighborhood
+8650 Belford Ave,90045,Los Angeles,MultiFamily2To4,NA,NA,1968,NA,1235,2.0,3,954343,Westchester,neighborhood
+125 Lighthouse Mall,90292,Marina Del Rey,SingleFamily,2018,2402086.0,1999,3148,3670,5.0,3,2867534,Venice,neighborhood
+831 E 85th St,90001,Los Angeles,SingleFamily,2018,323850.0,1926,5100,702,1.0,2,391578,Southeast Los Angeles,neighborhood
+11212 Blix St,91602,North Hollywood,SingleFamily,2018,623388.0,NA,NA,NA,NA,NA,988079,North Hollywood,neighborhood
+418 N Orange Dr,90036,Los Angeles,Duplex,2018,990758.0,1927,7427,4563,4.0,6,2367838,Mid Wilshire,neighborhood
+3816 Laurel Canyon Blvd,91604,Studio City,SingleFamily,2018,1508580.0,1923,25134,2140,3.0,3,1808097,Studio City,neighborhood
+1623 Arapahoe St,90006,Los Angeles,Duplex,2018,316632.0,1911,6524,2853,3.0,6,839615,Harvard Heights,neighborhood
+685 Washington Blvd,90292,Marina Del Rey,SingleFamily,2018,1097830.0,2005,2500,2051,3.0,3,2113468,Venice,neighborhood
+2029 W 85th St,90047,Los Angeles,SingleFamily,2018,270858.0,1927,5719,1521,1.0,3,587710,South Los Angeles,neighborhood
+8880 Burnet Ave,91343,North Hills,SingleFamily,2018,418200.0,2007,2726,1420,3.0,4,533378,North Hills,neighborhood
+8541 Mammoth Ave,91402,Panorama City,SingleFamily,2018,204367.0,1949,5916,1436,2.0,3,528643,Panorama City,neighborhood
+8435 Burnet Ave UNIT 101,91343,Los angeles,Condominium,2018,170162.0,1979,3284,1122,1.5,2,346186,North Hills,neighborhood
+6930 Simpson Ave APT 6,91605,North Hollywood,MultiFamily5Plus,NA,NA,NA,NA,740,1.0,1,666504,North Hollywood,neighborhood
+121 E 104th St,90003,Los Angeles,SingleFamily,2018,363000.0,1957,5633,1168,1.0,3,416699,Southeast Los Angeles,neighborhood
+1320 Ingraham St,90017,Los Angeles,SingleFamily,2018,297617.0,1900,3519,1776,2.0,4,593886,Westlake,neighborhood
+1311 Tamarind Ave,90028,Los Angeles,SingleFamily,2018,50397.0,1923,6502,1932,3.0,3,NA,Hollywood,neighborhood
+311 N Orange Dr,90036,Los Angeles,Duplex,2018,1542217.0,1927,7155,4841,6.0,6,2178522,Mid Wilshire,neighborhood
+2270 Glendale Blvd,90039,Los Angeles,SingleFamily,2018,129499.0,NA,9692,NA,NA,0,NA,Silver Lake,neighborhood
+13005 Delano St,91401,Van Nuys,SingleFamily,2018,793305.0,1953,7905,2075,3.0,5,828319,Valley Glen,neighborhood
+15215 Rex St,91342,Sylmar,SingleFamily,2018,200377.0,1977,7484,1700,2.0,4,570047,Sylmar,neighborhood
+1811 Kemper St,90065,Los Angeles,SingleFamily,2018,829572.0,2008,4440,2700,3.0,3,1439527,Mount Washington,neighborhood
+7347 Camellia Ave,91605,North Hollywood,SingleFamily,2018,182077.0,1947,6746,1028,1.0,3,560455,Sun Valley,neighborhood
+1416 N Mariposa Ave,90027,Los Angeles,Duplex,2018,371330.0,1920,6789,2006,2.0,3,1007603,Hollywood,neighborhood
+3315 Malcolm Ave,90034,Los Angeles,SingleFamily,2018,579401.0,1970,10591,2347,3.0,3,1894761,Palms,neighborhood
+17115 Chatsworth St APT 202,91344,Granada Hills,MultiFamily2To4,NA,NA,NA,NA,NA,3.0,3,738110,Granada Hills,neighborhood
+1515 Cardiff Ave,90035,Los Angeles,SingleFamily,2018,765923.0,1941,7020,2521,3.0,4,2560381,Pico-Robertson,neighborhood
+13840 Magnolia Blvd,91423,Sherman Oaks,SingleFamily,2018,595238.0,1948,8099,2400,2.0,3,1275755,Sherman Oaks,neighborhood
+16909 Strawberry Dr,91436,Encino,SingleFamily,2018,832983.0,1960,16692,2866,3.0,3,1631260,Encino,neighborhood
+516 N Burlington Ave,90026,Los Angeles,SingleFamily,2018,499800.0,1921,1293,552,1.0,2,614068,Echo Park,neighborhood
+12568 Brooklake St,90066,Los Angeles,SingleFamily,2018,164118.0,1947,5699,1866,2.0,3,1669561,Mar Vista,neighborhood
+1042 N Orlando Ave,90069,Los Angeles,SingleFamily,2018,2323783.0,1923,12254,2134,3.0,5,3543457,Mid City West,neighborhood
+11107 Blix St,91602,North Hollywood,SingleFamily,2018,192771.0,1926,8256,1055,1.0,2,951993,North Hollywood,neighborhood
+9836 Amanita Ave,91042,Tujunga,SingleFamily,2018,616000.0,1957,5161,1190,2.0,2,710123,Tujunga,neighborhood
+4050 Woodman Cyn,91423,Sherman Oaks,SingleFamily,2018,1628799.0,1999,7006,3326,3.5,4,1695915,Sherman Oaks,neighborhood
+17440 Runnymede St,91406,Van Nuys,SingleFamily,2018,240976.0,1950,5999,1324,2.0,3,580097,Lake Balboa,neighborhood
+12306 Gorham Ave,90049,Los Angeles,SingleFamily,2018,1392474.0,1925,6000,2156,3.0,4,2625115,Brentwood,neighborhood
+4323 Honduras St,90011,Los Angeles,Duplex,2018,32324.0,1912,5360,2022,2.0,5,539220,Central City,neighborhood
+1227 W Denni St,90744,Wilmington,SingleFamily,2018,398296.0,1966,5715,1408,2.0,4,497012,Wilmington,neighborhood
+3216 Military Ave,90034,Los Angeles,SingleFamily,2018,77089.0,1936,6400,1239,1.0,2,2195935,Palms,neighborhood
+5170 Wilshire Blvd,90036,Los Angeles,Unknown,NA,NA,NA,NA,NA,NA,NA,1674339,Mid City,neighborhood
+8951 Kittyhawk Ave,90045,Los Angeles,SingleFamily,2018,77081.0,1942,6964,1360,2.0,3,941653,Westchester,neighborhood
+1515 S Walker Ave,90731,San Pedro,Duplex,2018,239742.0,1923,6242,1512,2.0,5,708863,San Pedro,neighborhood
+6101 Afton Pl,90028,Los Angeles,Quadruplex,2018,128816.0,1922,7699,5746,4.0,8,2163844,Hollywood,neighborhood
+10270 Stanwin Ave,91331,Arleta,SingleFamily,2018,340331.0,1964,4791,1301,2.0,3,521615,Mission Hills,neighborhood
+8359 Katherine Ave,91402,Panorama City,SingleFamily,2018,271356.0,1949,5662,780,1.0,2,442999,Panorama City,neighborhood
+826 E 105th St,90002,Los Angeles,SingleFamily,2018,130675.0,1926,5393,960,1.0,2,382567,Southeast Los Angeles,neighborhood
+1840 S Redondo Blvd,90019,Los Angeles,Quadruplex,2018,373830.0,1942,6786,2698,4.0,6,1034678,Mid City,neighborhood
+13300 Remington St,91331,Pacoima,SingleFamily,2018,247710.0,1949,8285,1188,1.0,2,473867,Pacoima,neighborhood
+1646 W 204th St,90501,Torrance,Quadruplex,2018,350930.0,1944,7000,2544,5.0,6,917340,Harbor Gateway,neighborhood
+22510 Lull St,91304,Canoga Park,SingleFamily,2018,262457.0,1959,6969,1570,1.0,3,659390,West Hills,neighborhood
+10115 Haddon Ave,91331,Pacoima,SingleFamily,2018,NA,NA,8978,NA,NA,NA,564798,Pacoima,neighborhood
+1304 W Manchester Ave,90044,Los Angeles,Triplex,2018,368612.0,1911,5561,2495,3.0,6,634459,South Los Angeles,neighborhood
+11156 Gaynor Ave,91344,Granada Hills,SingleFamily,2018,322149.0,1954,7724,1877,2.0,4,635321,Granada Hills,neighborhood
+8739 Ranchito Ave,91402,Panorama City,SingleFamily,2018,439833.0,1950,5899,1346,1.0,2,522812,Panorama City,neighborhood
+1277 Palisades Dr,90272,Pacific Palisades,Condominium,2018,1008871.0,1973,136722,1575,2.0,2,936205,Pacific Palisades,neighborhood
+820 W 75th St,90044,Los Angeles,SingleFamily,2018,260524.0,1921,5600,1264,2.0,3,468716,South Los Angeles,neighborhood
+2421 W Sunset Blvd,90026,Los Angeles,Quadruplex,2018,285952.0,1922,5965,4476,4.0,4,1515393,Silver Lake,neighborhood
+1912 W 65th Pl,90047,Los Angeles,SingleFamily,2018,122017.0,1925,4149,936,1.0,2,427389,South Los Angeles,neighborhood
+12549 Debell St,91331,Pacoima,SingleFamily,2018,182067.0,1952,6240,1403,1.0,3,495950,Pacoima,neighborhood
+2834 Deep Canyon Dr,90210,Beverly Hills,SingleFamily,2018,1563192.0,2000,15392,6080,7.0,6,4633039,Beverly Crest,neighborhood
+4938 Bruges Ave,91364,Woodland Hills,SingleFamily,2018,343146.0,1956,19181,2056,3.0,4,927032,Woodland Hills,neighborhood
+4237 S Olive St,90037,Los Angeles,Triplex,2018,162979.0,1940,6508,2166,3.0,5,578016,Southeast Los Angeles,neighborhood
+10043 Memory Park Ave,91345,Mission Hills,SingleFamily,2018,73207.0,1954,7736,1450,2.0,3,555564,Mission Hills,neighborhood
+120 Breeze Ave,90291,Venice,SingleFamily,2018,1160720.0,1930,2265,1063,2.0,2,1611165,Venice,neighborhood
+4345 Manson Ave,91364,Woodland Hills,SingleFamily,2018,564767.0,1959,11518,2322,3.0,3,1014655,Woodland Hills,neighborhood
+4711 Compton Ave,90011,Los Angeles,SingleFamily,2018,64051.0,1905,4985,766,1.0,1,371057,Southeast Los Angeles,neighborhood
+1317 Linwood Ave,90017,Los Angeles,MultiFamily2To4,2018,201379.0,1905,6608,4862,NA,0,1174531,Westlake,neighborhood
+1625 Delta St,90026,Los Angeles,SingleFamily,2018,636020.0,1913,6477,1084,1.0,2,960881,Echo Park,neighborhood
+24014 Vanowen St,91307,West Hills,SingleFamily,2018,176753.0,1959,6846,1250,2.0,3,566018,West Hills,neighborhood
+5329 Fountain Ave,90029,Los Angeles,SingleFamily,2018,386152.0,1922,3310,1440,3.0,4,964065,Hollywood,neighborhood
+746 N Sycamore Ave,90038,Los Angeles,SingleFamily,2018,425713.0,1922,7429,1423,2.0,2,1982383,Hollywood,neighborhood
+1511 Tower Grove Dr,90210,Beverly Hills,SingleFamily,2018,1508313.0,1966,15000,2168,3.0,3,2704309,Beverly Crest,neighborhood
+2842 Las Alturas St,90068,Los Angeles,SingleFamily,2018,702673.0,1958,4791,1934,3.0,3,1413716,Hollywood Hills,neighborhood
+8311 S Main St,90003,Los Angeles,SingleFamily,2018,212763.0,1924,6306,940,1.0,3,552240,Southeast Los Angeles,neighborhood
+13444 Cumpston St,91401,Sherman Oaks,SingleFamily,2018,104674.0,1957,5982,1658,2.0,3,937387,Sherman Oaks,neighborhood
+8542 Ponce Ave,91304,Canoga Park,SingleFamily,2018,723078.0,1959,10890,2481,4.0,4,772526,West Hills,neighborhood
+530 S Mapleton Dr,90024,Los Angeles,SingleFamily,2018,2.4875414E7,1927,56216,6393,5.5,5,28148078,Westwood,neighborhood
+8850 De Haviland Ave,90045,Los Angeles,SingleFamily,2018,855208.0,1942,6130,1631,2.0,3,954347,Westchester,neighborhood
+950 S Fairfax Ave APT 424,90036,Los Angeles,Apartment,NA,NA,NA,NA,547,1.0,0,NA,Mid City,neighborhood
+21135 Nashville St,91311,Chatsworth,SingleFamily,2018,1115000.0,1979,19676,3456,3.0,5,1056421,Chatsworth,neighborhood
+20051 Septo St,91311,Chatsworth,SingleFamily,2018,540044.0,1971,11029,2570,3.0,4,773969,Chatsworth,neighborhood
+15714 Marilla St,91343,North Hills,SingleFamily,2018,561000.0,1965,11036,2225,2.0,2,626455,North Hills,neighborhood
+1283 W 35th St,90007,Los Angeles,MultiFamily2To4,NA,NA,1906,7000,5178,9.0,15,2172389,South Los Angeles,neighborhood
+1236 W Dolores St,90744,Wilmington,SingleFamily,2018,94017.0,1962,5000,1948,2.5,5,603127,Wilmington,neighborhood
+10256 Tujunga Canyon Blvd # F,91042,Tujunga,MultiFamily2To4,NA,NA,NA,NA,383,1.0,1,602103,Tujunga,neighborhood
+19411 Archwood St,91335,Reseda,SingleFamily,2018,136569.0,1951,6048,1295,2.0,3,529528,Reseda,neighborhood
+7231 8th Ave,90043,Los Angeles,SingleFamily,2018,283606.0,1924,6075,1126,2.0,3,517671,Hyde Park,neighborhood
+22564 Enadia Way,91307,West Hills,SingleFamily,2018,535011.0,2000,5869,3134,3.0,5,837890,West Hills,neighborhood
+8415 Hillside Ave,90069,Los Angeles,SingleFamily,2018,387299.0,NA,NA,NA,NA,0,NA,Hollywood Hills,neighborhood
+1600 Vine St APT 870,90028,Los Angeles,Apartment,NA,NA,2010,NA,1931,1.5,1,NA,Hollywood,neighborhood
+7600 W Manchester Ave APT 1412,90293,Playa Del Rey,Apartment,NA,NA,2011,NA,500,1.0,0,NA,Playa Del Rey,neighborhood
+13609 Valerio St UNIT F,91405,Los angeles,Condominium,2018,174770.0,1976,141841,1325,3.0,2,401430,Van Nuys,neighborhood
+11150 Roscoe Blvd,91352,Sun Valley,SingleFamily,2018,187661.0,1950,8712,1104,1.0,2,526467,Sun Valley,neighborhood
+3010 6th Ave,90018,Los Angeles,SingleFamily,2018,560780.0,1912,5750,2158,2.0,3,788801,Jefferson Park,neighborhood
+10261 Arnwood Rd,91342,Sylmar,SingleFamily,2018,240195.0,1961,11009,1938,3.0,3,736238,Lakeview Terrace,neighborhood
+527 Midvale Ave # 516,90024,Los Angeles,Condominium,2018,250075.0,1986,42695,877,2.0,2,699973,Westwood,neighborhood
+13458 Ratner St,91402,Panorama City,SingleFamily,2018,78595.0,1955,7517,1414,2.0,3,582415,Arleta,neighborhood
+5648 Columbus Ave,91411,Van Nuys,SingleFamily,2018,233331.0,1948,6755,1215,2.0,3,903929,Sherman Oaks,neighborhood
+1745 W 42nd St,90062,Los Angeles,SingleFamily,2018,200474.0,1920,5875,1250,1.0,2,608493,South Los Angeles,neighborhood
+2015 W 41st Dr,90062,Los Angeles,SingleFamily,2018,198125.0,1920,5501,1042,1.0,2,558749,South Los Angeles,neighborhood
+3517 Dixie Canyon Pl,91423,Sherman Oaks,SingleFamily,2018,701195.0,1991,4931,4714,5.0,5,2806486,Sherman Oaks,neighborhood
+23220 Ladrillo St,91367,Woodland Hills,SingleFamily,2018,423766.0,1962,6534,1450,3.0,3,786842,Woodland Hills,neighborhood
+1917 N Commonwealth Ave,90027,Los Angeles,SingleFamily,2018,1242892.0,1912,6776,1921,2.0,3,1357532,Los Feliz,neighborhood
+4207 Russell Ave,90027,Los Angeles,Duplex,2018,445774.0,1932,6807,2400,2.0,5,1345368,Los Feliz,neighborhood
+2815 Folsom St,90033,Los Angeles,MultiFamily2To4,2018,525300.0,1928,5845,2623,4.0,5,685216,Boyle Heights,neighborhood
+424 W 109th St,90061,Los Angeles,SingleFamily,2018,331500.0,1924,5323,1029,1.0,3,400035,South Los Angeles,neighborhood
+3418 10th Ave,90018,Los Angeles,Duplex,2018,245372.0,1928,5593,2016,2.0,4,755856,Jefferson Park,neighborhood
+7415 Quartz Ave,91306,Winnetka,SingleFamily,2018,94048.0,1953,6943,1646,2.0,4,580018,Winnetka,neighborhood
+1618 254th St,90710,Harbor City,SingleFamily,2018,883299.0,1950,12077,4088,4.0,8,1072455,Harbor City,neighborhood
+128 Quarterdeck Mall,90292,Marina Del Rey,SingleFamily,2018,1560170.0,1988,3150,4711,4.5,4,3461127,Venice,neighborhood
+24 Breeze Ave,90291,Venice,Apartment,2018,533303.0,1963,2698,1000,2.0,2,NA,Venice,neighborhood
+16605 Park Lane Cir,90049,Los Angeles,SingleFamily,2018,1194394.0,1962,13250,3286,4.0,4,2732436,Brentwood,neighborhood
+229 E Vernon Ave,90011,Los Angeles,SingleFamily,2018,177760.0,1927,5004,1424,2.0,4,449348,Southeast Los Angeles,neighborhood
+16821 Moorpark St,91436,Encino,SingleFamily,2018,564767.0,1949,9297,1979,3.0,3,1287476,Encino,neighborhood
+23530 Spires St,91304,Canoga Park,SingleFamily,2018,479082.0,1976,11049,1532,2.0,3,710815,West Hills,neighborhood
+2556 Greenvalley Rd,90046,Los Angeles,SingleFamily,2018,2651535.0,1954,38330,3235,4.5,4,4629131,Beverly Crest,neighborhood
+1400 S Vermont Ave,90006,Los Angeles,Duplex,2018,60705.0,1903,6850,2390,2.0,5,864349,Harvard Heights,neighborhood
+19820 Archwood St,91306,Winnetka,SingleFamily,2018,360309.0,1952,7980,1429,2.0,4,569241,Winnetka,neighborhood
+2227 Kelton Ave,90064,Los Angeles,SingleFamily,2018,367079.0,1927,5409,1429,2.0,3,1675375,West Los Angeles,neighborhood
+2326 E 3rd St,90033,Los Angeles,Quadruplex,2018,403717.0,1908,8890,3527,4.0,5,786601,Boyle Heights,neighborhood
+1601 Stearns Dr,90035,Los Angeles,Duplex,2018,294239.0,1930,6444,3367,4.0,NA,1557757,Pico-Robertson,neighborhood
+6315 Aldama St APT 9,90042,Los Angeles,Apartment,NA,NA,NA,NA,350,1.0,0,865001,Highland Park,neighborhood
+1665 Mandeville Canyon Rd,90049,Los Angeles,SingleFamily,2018,724869.0,1947,27326,3437,5.0,6,6992283,Brentwood,neighborhood
+1758 N Van Ness Ave,90028,Hollywood,Apartment,NA,NA,NA,NA,NA,1.0,2,NA,Hollywood,neighborhood
+16822 Kinzie St,91343,Northridge,SingleFamily,2018,435578.0,1987,7639,2235,3.0,4,718993,Northridge,neighborhood
+3032 Johnston St,90031,Los Angeles,SingleFamily,2018,11794.0,NA,5981,NA,NA,0,NA,Lincoln Heights,neighborhood
+109 S Berendo St,90004,Los Angeles,MultiFamily2To4,2018,1605000.0,1923,9047,6732,6.0,8,1834048,Koreatown,neighborhood
+726 W 37th St,90731,San Pedro,Duplex,2018,524808.0,1998,6403,3070,2.0,4,1033767,San Pedro,neighborhood
+2274 Canyon Dr,90068,Los Angeles,SingleFamily,2018,75577.0,1938,4169,1284,1.0,2,1184842,Hollywood Hills,neighborhood
+4651 Cerrillos Dr,91364,Woodland Hills,SingleFamily,2018,413968.0,1958,11371,1815,2.0,3,881716,Woodland Hills,neighborhood
+3024 11th Ave,90018,Los Angeles,SingleFamily,2018,48424.0,1948,6625,1101,1.0,2,709564,Jefferson Park,neighborhood
+8520 Tyrone Ave,91402,Panorama City,SingleFamily,2018,369341.0,1948,5880,806,1.0,2,447949,Panorama City,neighborhood
+5241 Hermitage Ave APT 1,91607,Valley Village,Apartment,NA,NA,1964,NA,900,2.0,2,NA,Valley Village,neighborhood
+17200 Oak View Dr,91316,Encino,SingleFamily,2018,2546177.0,1926,91040,5833,5.0,7,4083167,Encino,neighborhood
+5606 Green Oak Dr,90068,Los Angeles,SingleFamily,2018,2439600.0,1953,10324,2682,4.0,4,2577324,Hollywood Hills,neighborhood
+754 N Occidental Blvd,90026,Los Angeles,SingleFamily,2018,328489.0,1937,6014,1651,2.0,2,1061059,Silver Lake,neighborhood
+19143 Victory Blvd APT 130,91335,Reseda,MultiFamily5Plus,2018,52721.0,1964,28263,991,2.0,2,357736,Tarzana,neighborhood
+7801 Cowan Ave,90045,Los Angeles,SingleFamily,2018,729793.0,1951,7537,2528,2.0,3,1541243,Westchester,neighborhood
+2510 Langdale Ave,90041,Los Angeles,SingleFamily,2018,399847.0,1925,4870,936,1.0,2,762389,Eagle Rock,neighborhood
+6405 S Vermont Ave,90044,Los Angeles,SingleFamily,2018,135113.0,1929,2500,1404,1.0,1,NA,South Los Angeles,neighborhood
+1311 S Kenmore Ave,90006,Los Angeles,SingleFamily,2018,175193.0,1900,2577,1121,1.0,3,659898,Harvard Heights,neighborhood
+2215 Allesandro Way,90039,Los Angeles,SingleFamily,2018,55893.0,1937,5192,1192,1.0,2,912472,Silver Lake,neighborhood
+5530 Ventura Canyon Ave,91401,Sherman Oaks,SingleFamily,2018,865798.0,1928,9243,1798,2.0,4,950391,Sherman Oaks,neighborhood
+1201 Sanborn Ave,90029,Los Angeles,SingleFamily,2018,229653.0,1913,4996,1612,2.0,2,1052173,Silver Lake,neighborhood
+436 N Kingsley Dr,90004,Los Angeles,SingleFamily,2018,66525.0,1919,6574,1157,1.0,2,1231491,Hollywood,neighborhood
+13413 Friar St,91401,Van Nuys,SingleFamily,2018,87431.0,1954,6926,1772,2.0,4,799371,Valley Glen,neighborhood
+227 E 74th St,90003,Los Angeles,SingleFamily,2018,165460.0,1926,4863,884,1.0,2,367541,Southeast Los Angeles,neighborhood
+12144 Blix St,91607,Valley Village,SingleFamily,2018,436168.0,1939,8699,2333,2.0,2,1309395,Valley Village,neighborhood
+227 N Trotwood Ave,90732,San Pedro,SingleFamily,2018,463772.0,1955,6074,1494,2.0,3,832475,San Pedro,neighborhood
+324 W 118th St,90061,Los Angeles,SingleFamily,2018,185287.0,1921,5200,836,1.0,2,397024,Southeast Los Angeles,neighborhood
+2708 Casiano Rd,90077,Los Angeles,SingleFamily,2018,1202200.0,1970,13792,2843,3.0,2,2271485,Bel Air,neighborhood
+2443 La Condesa Dr,90049,Los Angeles,SingleFamily,2018,1715084.0,1967,54718,2385,3.0,4,3076166,Brentwood,neighborhood
+6107 Alcott St,90035,Los Angeles,MultiFamily2To4,2018,275515.0,1928,6001,450,1.0,0,1426852,Pico-Robertson,neighborhood
+5109 6th Ave,90043,Los Angeles,SingleFamily,2018,335058.0,1920,6346,1184,1.0,2,519942,Hyde Park,neighborhood
+23415 Sidlee Pl,90710,Harbor City,SingleFamily,2018,89367.0,1969,5151,1574,2.0,4,630201,Harbor City,neighborhood
+1861 W 12th St,90006,Los Angeles,Triplex,2018,117396.0,1895,6250,1311,3.0,NA,778545,Pico-Union,neighborhood
+8485 Val Verde Dr,91304,Canoga Park,SingleFamily,2018,825000.0,2002,9452,2658,4.0,4,892930,West Hills,neighborhood
+717 N Cherokee Ave,90038,Los Angeles,SingleFamily,2018,1107962.0,1923,7627,1447,2.0,3,1707764,Hollywood,neighborhood
+1438 E 53rd St,90011,Los Angeles,SingleFamily,2018,327439.0,1979,5488,1200,2.0,4,450045,Southeast Los Angeles,neighborhood
+333 N Union Ave,90026,Los Angeles,MultiFamily2To4,2018,1154844.0,1885,6904,4558,9.0,5,1359316,Westlake,neighborhood
+22497 Venido Rd,91364,Woodland Hills,SingleFamily,2018,753518.0,1981,8712,2691,3.0,4,944800,Woodland Hills,neighborhood
+425 E 99th St,90003,Los Angeles,SingleFamily,2018,220501.0,1925,5080,1067,1.0,3,404025,Southeast Los Angeles,neighborhood
+15732 Kadota St,91342,Sylmar,SingleFamily,2018,239117.0,1981,6999,1470,2.0,3,540582,Sylmar,neighborhood
+6512 Agnes Ave,91606,North Hollywood,SingleFamily,2018,370612.0,1941,6926,1244,2.0,2,662391,North Hollywood,neighborhood
+15945 San Fernando Mission Blvd,91344,Granada Hills,SingleFamily,2018,596153.0,1955,7199,1439,2.0,4,581973,Granada Hills,neighborhood
+320 Westminster Ave,90020,Los Angeles,MultiFamily2To4,2018,1721711.0,1918,6625,4220,2.0,14,2239868,Mid Wilshire,neighborhood
+437 S Hill St # 230,90013,Los Angeles,MultiFamily5Plus,NA,NA,NA,NA,481,1.0,0,NA,Downtown,neighborhood
+16360 Mandalay Dr,91436,Encino,SingleFamily,2018,764717.0,1957,12530,2233,2.0,3,1492301,Encino,neighborhood
+407 E 46th St,90011,Los Angeles,SingleFamily,2018,184554.0,1906,6254,1326,1.0,4,434120,Southeast Los Angeles,neighborhood
+8820 Ruthelen St,90047,Los Angeles,SingleFamily,2018,89238.0,1939,6135,1568,2.0,2,597150,South Los Angeles,neighborhood
+14073 Ryan St,91342,Sylmar,SingleFamily,2018,547638.0,1964,7405,1764,2.0,4,570620,Sylmar,neighborhood
+4609 Sunnyslope Ave,91423,Sherman Oaks,SingleFamily,2018,176847.0,1947,7817,2206,2.0,3,1358329,Sherman Oaks,neighborhood
+4246 Bakman Ave,91602,North Hollywood,SingleFamily,2018,627904.0,NA,NA,1907,2.0,NA,1405153,Studio City,neighborhood
+10904 National Blvd,90064,Los Angeles,MultiFamily2To4,2018,328616.0,1952,4807,1680,1.0,1,1583453,Palms,neighborhood
+1317 Bates Ave,90027,Los Angeles,Quadruplex,2018,732000.0,1923,6794,1775,3.0,4,1180217,Los Feliz,neighborhood
+1656 W 59th St,90047,Los Angeles,SingleFamily,NA,NA,1929,NA,522,1.0,2,451995,South Los Angeles,neighborhood
+10915 Louise Ave,91344,Granada Hills,SingleFamily,2018,356049.0,1953,8998,1100,1.0,2,569123,Granada Hills,neighborhood
+4317 Degnan Blvd,90008,Los Angeles,Unknown,NA,NA,NA,NA,NA,NA,NA,721882,Leimert Park,neighborhood
+7010 Willoughby Ave,90038,Los Angeles,Townhouse,NA,NA,NA,NA,1561,3.0,3,879714,Hollywood,neighborhood
+149 S Edinburgh Ave,90048,Los Angeles,SingleFamily,2018,2995000.0,1925,6550,1164,2.0,3,3199210,Mid City West,neighborhood
+22454 Cass Ave,91364,Woodland Hills,SingleFamily,2018,100881.0,1960,10052,1664,2.0,3,806019,Woodland Hills,neighborhood
+17534 Community St,91325,Northridge,SingleFamily,2018,133112.0,1947,22795,2007,2.0,4,803138,Northridge,neighborhood
+5056 La Roda Ave,90041,Los Angeles,SingleFamily,2018,203210.0,1921,6935,936,1.0,2,785844,Eagle Rock,neighborhood
+2217 S Canfield Ave,90034,Los Angeles,SingleFamily,2018,2163434.0,1949,7781,4202,4.0,6,3059318,Beverlywood,neighborhood
+1143 N New Hampshire Ave,90029,Los Angeles,MultiFamily2To4,2018,471916.0,1923,6751,2476,2.0,4,1161510,Hollywood,neighborhood
+715 W 138th St,90247,Gardena,SingleFamily,2018,53643.0,1947,5997,957,1.0,3,493870,Harbor Gateway,neighborhood
+13519 S Ainsworth St,90247,Gardena,SingleFamily,2018,141993.0,1947,6016,856,1.0,2,478687,Harbor Gateway,neighborhood
+19822 Friar St,91367,Woodland Hills,SingleFamily,2018,158834.0,1954,8214,1392,2.0,4,667272,Woodland Hills,neighborhood
+3846 S Gramercy Pl,90062,Los Angeles,Quadruplex,2018,690592.0,1918,3381,3200,4.0,4,936755,South Los Angeles,neighborhood
+4551 Saloma Ave,91403,Sherman Oaks,SingleFamily,2018,302526.0,1940,6153,1191,1.0,2,836218,Sherman Oaks,neighborhood
+1311 1/2 Bates Ave,90027,Los Angeles,SingleFamily,NA,NA,NA,NA,NA,1.0,1,1103973,Los Feliz,neighborhood
+4604 Yosemite Way,90041,Los Angeles,SingleFamily,2018,195670.0,1974,6152,2174,3.0,3,1114463,Eagle Rock,neighborhood
+722 W 43rd Pl,90037,Los Angeles,Quadruplex,2018,57687.0,1910,6007,2860,4.0,4,635338,South Los Angeles,neighborhood
+1710 Vineyard Ave,90019,Los Angeles,SingleFamily,2018,48538.0,1923,3154,816,2.0,2,627419,Mid City,neighborhood
+6904 Langdon Ave,91406,Van Nuys,SingleFamily,2018,464017.0,1957,6245,1499,2.0,3,611735,Van Nuys,neighborhood
+1168 W 25th St,90007,Los Angeles,SingleFamily,2018,24932.0,1895,5932,805,1.0,2,596250,University Park,neighborhood
+9006 Rhea Ave,91324,Northridge,SingleFamily,2018,197295.0,1952,6199,1245,1.0,3,565012,Northridge,neighborhood
+7627 Machrea St,91042,Tujunga,SingleFamily,NA,NA,NA,NA,2100,3.0,3,772721,Tujunga,neighborhood
+15732 Septo St,91343,North Hills,SingleFamily,2018,263855.0,1952,6625,1164,2.0,3,533581,North Hills,neighborhood
+8909 Nestle Ave,91325,Northridge,SingleFamily,2018,226285.0,1954,6733,1527,2.0,3,643780,Northridge,neighborhood
+4337 Toland Pl,90041,Los Angeles,SingleFamily,2018,1001896.0,1961,8696,5266,5.0,7,1828335,Eagle Rock,neighborhood
+5745 Jamieson Ave,91316,Encino,SingleFamily,2018,537605.0,1949,6534,1065,2.0,2,662752,Encino,neighborhood
+11973 Adelphia Ave,91331,Pacoima,SingleFamily,2018,94580.0,1957,6072,1435,2.5,4,500799,Pacoima,neighborhood
+1708 Amelia Ave,90731,San Pedro,SingleFamily,2018,597231.0,1961,5250,2629,3.0,4,795252,San Pedro,neighborhood
+415 N Cliffwood Ave,90049,Los Angeles,SingleFamily,2018,5875802.0,1924,17428,5559,7.0,4,7990779,Brentwood,neighborhood
+22144 Mayall St,91311,Chatsworth,SingleFamily,2018,780300.0,1978,7504,2773,3.0,4,767208,Chatsworth,neighborhood
+2133 Park Dr,90026,Los Angeles,SingleFamily,2018,1046066.0,1988,10606,2469,4.5,5,1435973,Echo Park,neighborhood
+1436 Crestview Ct,90024,Los Angeles,SingleFamily,2018,221012.0,1924,8260,2382,2.0,5,2515298,Westwood,neighborhood
+8563 Remmet Ave,91304,Canoga Park,SingleFamily,2018,411723.0,1956,7503,2062,3.0,6,668334,Canoga Park,neighborhood
+6729 Ben Ave,91606,North Hollywood,SingleFamily,2018,567017.0,1926,8002,1938,2.0,3,677667,North Hollywood,neighborhood
+12811 Adelphia Ave,91340,San Fernando,SingleFamily,2018,68254.0,1950,13495,1045,2.0,2,495182,Sylmar,neighborhood
+10835 Palms Blvd,90034,Los Angeles,Duplex,2018,428952.0,1954,4591,1664,2.0,4,1301470,Palms,neighborhood
+124 E R St,90744,Wilmington,SingleFamily,2018,328035.0,1953,6402,920,1.0,3,468843,Wilmington,neighborhood
+4719 Brewster Dr,91356,Tarzana,SingleFamily,2018,1172344.0,1975,17955,3221,4.0,5,1636260,Tarzana,neighborhood
+3660 Stone Canyon Ave,91403,Sherman Oaks,SingleFamily,2018,587083.0,1956,26590,2579,3.0,5,1908570,Sherman Oaks,neighborhood
+327 W 47th St,90037,Los Angeles,SingleFamily,2018,54986.0,1908,5404,1484,1.0,2,429171,Southeast Los Angeles,neighborhood
+2728 E Cesar E Chavez Ave,90033,Los Angeles,Quadruplex,2018,58552.0,1922,5552,3706,NA,NA,795455,Boyle Heights,neighborhood
+909 S Normandie Ave APT 01,90006,Los Angeles,MultiFamily2To4,NA,NA,1920,NA,NA,1.0,1,997307,Koreatown,neighborhood
+6931 Hazeltine Ave UNIT D,91405,Los Angeles,Townhouse,2018,134837.0,1992,57320,1480,3.0,3,465212,Van Nuys,neighborhood
+19448 Saticoy St,91335,Reseda,SingleFamily,2018,49931.0,1947,28717,630,1.0,1,483144,Reseda,neighborhood
+1865 Cochran Pl,90019,Los Angeles,SingleFamily,2018,262887.0,1953,6744,1385,1.0,2,1058828,Mid City,neighborhood
+20390 Alerion Pl,91364,Woodland Hills,SingleFamily,2018,896818.0,1965,16138,3007,4.0,4,1229306,Woodland Hills,neighborhood
+19128 Kenya St,91326,Porter Ranch,SingleFamily,2018,124920.0,1966,7568,2154,2.0,4,727812,Northridge,neighborhood
+14636 Mumford St,91402,Panorama City,SingleFamily,2018,212667.0,1955,8537,1591,2.0,3,568728,Panorama City,neighborhood
+1046 S Olive St,90015,Los Angeles,SingleFamily,2018,2946237.0,1911,16342,16050,NA,0,NA,Downtown,neighborhood

@@ -1,0 +1,66 @@
+---
+title: "Project 2"
+author: "Evan Elms"
+date: "6/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(knitr)
+library(XML)
+library(ZillowR)
+library(readr)
+```
+
+# Create the data set
+
+## Get Addresses
+
+```{r get_addresses, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
+getStreetAddresses <- function(numberOfAdr){
+  allAddresses <- read_csv("Addresses_in_the_City_of_Los_Angeles.csv")
+  allStreetAdr <- paste(allAddresses$HSE_NBR, allAddresses$STR_NM, allAddresses$STR_SFX_CD, sep = " ")
+  testStreetAdr <- sample(allStreetAdr, size = numberOfAdr)
+  return (testStreetAdr)
+}
+```
+
+## Call Zillow API
+
+```{r call_api, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
+callAPI <- function(addressNames){
+  myZillowID <- read_file(file = "C:\\Users\\Evan Elms\\Documents\\ZillowID.txt")
+  attrNames <- c("street","zipcode","city","useCode","taxAssessmentYear","taxAssessment","yearBuilt","lotSizeSqFt","finishedSqFt","bathrooms","bedrooms","amount")
+  allHomes <- rep(NA, (length(attrNames)+2))
+  for(i in 1:length(addressNames)){
+  	housingLAData <- GetDeepSearchResults(address = addressNames[i], citystatezip = "Los Angeles, CA", zws_id = myZillowID)
+  	xmlHomeResponse <- dput(housingLAData$response)
+  	if(is.null(xmlHomeResponse) || is.null((getNodeSet(xmlHomeResponse, "//amount") %>% unlist)["children.text.value"][[1]])){
+  		next
+  	}
+  	currentHome <- rep(NA, (length(attrNames)+2))
+  	for(i in 1:length(attrNames)) {
+  	  attributeValue <- (getNodeSet(xmlHomeResponse, paste0("//",attrNames[i])) %>% unlist)["children.text.value"][[1]]
+  		currentHome[i] <- ifelse(is.null(attributeValue), NA, attributeValue)
+  	}
+  	currentHome[13] <- (getNodeSet(xmlHomeResponse, "//region") %>% unlist)["attributes.name"][[1]]
+  	currentHome[14] <- (getNodeSet(xmlHomeResponse, "//region") %>% unlist)["attributes.type"][[1]]
+  	allHomes <- rbind(allHomes, currentHome)
+  }
+  allHomes <- allHomes[-1, ]
+  rownames(allHomes) <- NULL
+  colnames(allHomes) <- c(attrNames, "regionName", "regionType")
+  return (allHomes)
+}
+```
+
+## Execution Time! 
+
+```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
+addressNames <- getStreetAddresses(4500)
+finalHomeList <- callAPI(addressNames)
+finalHomeList <- data.frame(finalHomeList)
+write_csv(finalHomeList, path = "HomeDataLA.csv")
+```
