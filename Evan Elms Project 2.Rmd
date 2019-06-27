@@ -62,7 +62,7 @@ callAPI <- function(addressNames){
 ## Execution Time! 
 
 ```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
-addressNames <- getStreetAddresses(4900)
+addressNames <- getStreetAddresses(5000)
 finalHomeList <- callAPI(addressNames)
 finalHomeList <- data.frame(finalHomeList)
 write_csv(finalHomeList, path = "HomeDataLA.csv")
