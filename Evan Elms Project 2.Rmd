@@ -43,11 +43,13 @@ callAPI <- function(addressNames){
   	currentHome <- rep(NA, (length(attrNames)+2))
   	for(i in 1:length(attrNames)) {
   	  attributeValue <- (getNodeSet(xmlHomeResponse, paste0("//",attrNames[i])) %>% unlist)["children.text.value"][[1]]
-  		currentHome[i] <- ifelse(is.null(attributeValue), NA, attributeValue)
+  		currentHome[i] <- ifelse(!is.null(attributeValue), attributeValue, NA)
   	}
   	currentHome[13] <- (getNodeSet(xmlHomeResponse, "//region") %>% unlist)["attributes.name"][[1]]
   	currentHome[14] <- (getNodeSet(xmlHomeResponse, "//region") %>% unlist)["attributes.type"][[1]]
-  	allHomes <- rbind(allHomes, currentHome)
+  	if(!(is.na(currentHome[12]))) {
+  	  allHomes <- rbind(allHomes, currentHome)
+  	}
   }
   allHomes <- allHomes[-1, ]
   rownames(allHomes) <- NULL
@@ -59,7 +61,7 @@ callAPI <- function(addressNames){
 ## Execution Time! 
 
 ```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
-addressNames <- getStreetAddresses(4500)
+addressNames <- getStreetAddresses(50)
 finalHomeList <- callAPI(addressNames)
 finalHomeList <- data.frame(finalHomeList)
 write_csv(finalHomeList, path = "HomeDataLA.csv")
