@@ -41,15 +41,16 @@ callAPI <- function(addressNames){
   		next
   	}
   	currentHome <- rep(NA, (length(attrNames)+2))
-  	for(i in 1:length(attrNames)) {
-  	  attributeValue <- (getNodeSet(xmlHomeResponse, paste0("//",attrNames[i])) %>% unlist)["children.text.value"][[1]]
-  		currentHome[i] <- ifelse(!is.null(attributeValue), attributeValue, NA)
+  	for(j in 1:length(attrNames)) {
+  	  attributeValue <- (getNodeSet(xmlHomeResponse, paste0("//",attrNames[j])) %>% unlist)["children.text.value"][[1]]
+  		currentHome[j] <- ifelse(!is.null(attributeValue), attributeValue, NA)
   	}
   	currentHome[13] <- (getNodeSet(xmlHomeResponse, "//region") %>% unlist)["attributes.name"][[1]]
   	currentHome[14] <- (getNodeSet(xmlHomeResponse, "//region") %>% unlist)["attributes.type"][[1]]
   	if(!(is.na(currentHome[12]))) {
   	  allHomes <- rbind(allHomes, currentHome)
   	}
+  	print(paste0("Current iteration of homes =", i))
   }
   allHomes <- allHomes[-1, ]
   rownames(allHomes) <- NULL
@@ -61,7 +62,7 @@ callAPI <- function(addressNames){
 ## Execution Time! 
 
 ```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
-addressNames <- getStreetAddresses(50)
+addressNames <- getStreetAddresses(4900)
 finalHomeList <- callAPI(addressNames)
 finalHomeList <- data.frame(finalHomeList)
 write_csv(finalHomeList, path = "HomeDataLA.csv")
