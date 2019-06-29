@@ -182,3 +182,19 @@ finalHomeList <- callAPI(addressNames)
 finalHomeList <- data.frame(finalHomeList)
 write_csv(finalHomeList, path = "HomeDataLA.csv")
 ```
+
+# Data split
+
+Since the response column "amount" is already cleaned and verified to have no NA observations in the `callAPI` function, we can simply use the `sample` and `setdiff` function to split the data where 80% is used for training our models and 20% is used for testing our trees. After using the `read_csv` function to pull the data from the API function above and setting the seed for future test cases, the `sample` function randomly selects 80% of the rows with the help of the `nrow` function to determine how many observations are in the data set. Then the `setdiff` function sets all observations not in the training set to the test bracket. All the training data is pulled from the main data set and stored in `addressTrain` while the test data set in the same method is stored in `addressTest`.
+
+For this sample testing, the CSV file "HomeDataLA" has 3164 observations where 2531 observations will be used for training and the remaining 632 records will be used to test the models at the end. 
+
+```{r split_data, echo=TRUE,warning=FALSE,message=FALSE}
+addressData <- read_csv("HomeDataLA.csv")
+set.seed(117)
+train <- sample(1:nrow(addressData), size = nrow(addressData)*0.8)
+test <- dplyr::setdiff(1:nrow(addressData), train)
+addressTrain <- addressData[train, ]
+addressTest <- addressData[test, ]
+```
+
