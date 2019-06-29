@@ -14,9 +14,49 @@ library(ZillowR)
 library(readr)
 ```
 
-# Create the data set
+# Get Addresses
 
-## Get Addresses
+## About the data
+
+Before calling Zillow's Realestate APIs, we must first gather all possible addresses in the Las Angeles county area. Since the Bureau of Engineering maintains a [list of all registered LA addresses](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/e922beea-6b7a-46ab-a3fb-536dd3f6fdd5), we can download the comma-seperated values (CSV) file and extract the 1,002,025 addresses. In this file we find the following columns:  
+
+* HSE_ID
+* PIN
+* PIND
+* HSE_NBR
+* HSE_FRAC_NBR
+* HSE_DIR_CD
+* STR_NM
+* STR_SFX_CD
+* STR_SFX_DIR_CD
+* UNIT_RANGE
+* ZIP_CD
+* LAT
+* LON
+* X_COORD_NBR
+* Y_COORD_NBR
+* ASGN_STTS_IND
+* ENG_DIST
+* CNCL_DIST
+
+Several of these columns are related to either the coordinates of each address (like LAT and LON) or key values used by the government entity when collecting the information. For calling the Zillow APIs we only need to focus on HSE_NBR, STR_NM, and STR_SFX_CD. Below is a sample of these columns:
+
+---
+Code comment: the below r code is used for display purposes only. I took a small set of addresses from the original file to show the columns we are focusing on in order to obtain a list of addresses that can be used in the Zillow API. This is done by reading in the CSV using read_csv function along with the kable and head functions to display the sample data. 
+---
+
+```{r display_addresses, echo=FALSE,warning=FALSE,message=FALSE}
+someAddresses <- read_csv("Addresses_in_the_City_of_Los_Angeles.csv")
+knitr::kable(head((someAddresses %>% select(HSE_NBR, STR_NM, STR_SFX_CD)),n = 10))
+```
+
+We can see that the HSE_NBR references the house number of a given address, STR_NM is the street name, and the STR_SFX_CD is the street suffix code determining what type of street the address resides on. There was an additional column HSE_DIR_CD that referenced the house directional code and contained N, S, E, or W but when I sampled a few addresses and input them into Zillow I found that the directional code was not needed to obtain realestate information on the sampled address.
+
+## Function to extract and sample the data
+
+To extract a list of potential LA addresses, I created the function `getStreetAddresses` that has an input for the number of sample addresses the user wants returned. Using the `read_csv` function to first pull the data into R then leveraging the `paste` function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space seperating each character column. The `sample` function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file. 
+
+Note: The below R code will not run as eval is set to "FALSE" since processing the data each time the project in knited would be time consuming. 
 
 ```{r get_addresses, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 getStreetAddresses <- function(numberOfAdr){
@@ -27,7 +67,76 @@ getStreetAddresses <- function(numberOfAdr){
 }
 ```
 
-## Call Zillow API
+# Call Zillow API
+
+## Querying the API
+
+After creating a data set of LA county addresses from the previous function, we can use the `ZillowR` package to call the Zillow API [GetDeepSearchResults](https://www.zillow.com/howto/api/GetDeepSearchResults.htm) that will return all attributes Zillow has about the provided address. To call this API we will provide the followingL
+
+* Address Name
+* City and State Name
+* ZWS ID
+
+For all calls to the API, the City and State Name will remain the same as the addresses were pulled only from the LA county data set. The ZWS ID will also remain the same for each `GET` as this is a unique ID created for each user who wants to call the API. The Address Name will change for each service call by looping through the list of randomly selected addresses. 
+
+## Address Data
+
+The response from the API is an `XML` dump of all realestate data that Zillow has aquired on the address provided by the user. While we could use and analyze all attributes provided, for this project we will focus on the following:
+
+* Street number and name
+    + Address information obtained in the previous step and reflected back from the API call
+* Zipcode
+    + Five digit number that represents which coded region of the LA county the address resides
+* City
+    + The City name within the LA county where the address resides
+* use Code
+    + A code used to determine what the address is used for, like business or residential
+* tax assessment year
+    + The last year the address was apraised for tax purposes
+* tax assessment value
+    + The value of the property based on the tax assessment
+* year built
+    + Year the building that resides on the address was buit
+* lot size
+    + A numeric value of how large the property size is
+* finished square feet
+    + The square footage of livable or usable property on the address
+* bathrooms
+    + The number of bathrooms located on the property
+* bedrooms
+    + The number of bedrooms located on the property
+* Zillow estimate amount
+    + The appraisal value for the address calculated by Zillow
+* region name
+    + Similar to the City attribute, the regional name Zillow associates with the address
+* region type
+    + Similar to the use Code attribute, the type of region Zillow associates with the address
+    
+Due to the response not being in a data frame format fitting for R, we will use the `XML` package to parse through all the data and collect the valuable attributes for each address. Before and after parsing the output, the functions `is.null` and `is.na` will be used to validate that Zillow has an estimated appriasal of the address since the estimate is our response variable that we want to predict.
+
+## Processing all home data
+
+Since I do not have unlimited time to call the Zillow API manually for each address, I created the function `callAPI` with an input parameter as a character vector of addresses and returns a data set of all succesful API responses containing the desired columns listed above. To achieve this fleet of looping through and validating all API responses, I used the packages `tidyverse`, `XML` and `ZillowR` along with two `for loops`. The following steps outline what operations the function performs:
+
+1. Using the `read_file` function to pull my Zillow ID, used to identify whose calling the API, and storing that in a variable `myZillowID`
+2. Create a character vector of attribute names found in the resopnse XML called `attrNames`
+3. Create an empty vector called `allHomes` that will store all valid addresses and return them after all processes are complete
+4. Outer `for loop` cycles through each address in the character vector passed by the user
+5. Use the `GetDeepSearchResults` function to call the Zillow API with the current address iteration and store the response in `housingLAData`
+6. Have the `dput` function pull only the API response out and store it in `xmlHomeResponse`
+7. `If` statement validates that the response was not null and that the Zillow estimate is not missing
+    + If either condition is TRUE then the `next` function cycles to the next address in the vector
+8. A vector of NAs called `currentHome` is temporarly created to store home attributes for the current iteration
+9. Inner `for loop` processes each column attribute in the `attrNames` vector and store it in `currentHome`
+10. Using the `getNodeSet` function to grab the each iteration of column values from the XML response and storing it in `attributeValue`
+11. `Ifelse` statement validates the attribute value is not null and stores either the attribute value or NA based on the logical condition
+12. After the inner `for loop` completes, both the region name and type are stored in `currentHome` as these attributes are formatted differently
+13. Another `If` statment validates that the Zillow estimate is not NA using the `is.na` function as Zillow can send unknown or unpredicted responses
+    + If the condition is meet, then the current address is added to the final list using the `rbind` function
+14. The outer `for loop` repeates Steps 5 - 13 for each observation in the address vector
+15. Before returning the final list, the first row is removed as it was used to instantiate the data frame but is not required for the user
+16. Using the `rownames` function to set all rows to null and `colnames` function to set all column names for the final data set
+17. `Return` function is used to deliver the complete data frame to the user
 
 ```{r call_api, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 callAPI <- function(addressNames){
@@ -59,7 +168,13 @@ callAPI <- function(addressNames){
 }
 ```
 
+Note: R code above has eval set to "FALSE" as running this code each time the project is knitted would be time consuming and not needed as it has been previously exectued. 
+
 ## Execution Time! 
+
+Now that both `getStreetAddresses` and `callAPI` functions are created, we can create a data set of randomly selected addresses, call the Zillow API for each address, and write the final data frame to a CSV file. The `getStreetAddresses` is first called with 5000 desired address samples as the Zillow API only allows upto 5000 API calls a day. Then the vector of addresses is passed to `callAPI` function that returns a data set which is transformed into a data frame using the `data.frame` function. Finally, `write_csv` function outputs the data frame to a CSV file so it can be used in the analysis sections and not have the API called each time a tree is adjusted! 
+
+Note: The below R code has eval set to "FALSE" so that the API is not called each time an edit is made to the file. 
 
 ```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 addressNames <- getStreetAddresses(5000)
