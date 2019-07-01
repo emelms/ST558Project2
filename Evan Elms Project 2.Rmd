@@ -12,6 +12,7 @@ library(knitr)
 library(XML)
 library(ZillowR)
 library(readr)
+library(caret)
 ```
 
 # Get Addresses
@@ -56,7 +57,7 @@ We can see that the HSE_NBR references the house number of a given address, STR_
 
 To extract a list of potential LA addresses, I created the function `getStreetAddresses` that has an input for the number of sample addresses the user wants returned. Using the `read_csv` function to first pull the data into R then leveraging the `paste` function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space seperating each character column. The `sample` function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file. 
 
-Note: The below R code will not run as eval is set to "FALSE" since processing the data each time the project in knited would be time consuming. 
+__Note__: The below R code will not run as eval is set to "FALSE" since processing the data each time the project in knited would be time consuming. 
 
 ```{r get_addresses, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 getStreetAddresses <- function(numberOfAdr){
@@ -94,7 +95,7 @@ The response from the API is an `XML` dump of all realestate data that Zillow ha
 * tax assessment year
     + The last year the address was apraised for tax purposes
 * tax assessment value
-    + The value of the property based on the tax assessment
+    + The value of the property based on the tax assessment by the federal government
 * year built
     + Year the building that resides on the address was buit
 * lot size
@@ -167,13 +168,13 @@ callAPI <- function(addressNames){
 }
 ```
 
-Note: R code above has eval set to "FALSE" as running this code each time the project is knitted would be time consuming and not needed as it has been previously exectued. 
+__Note__: R code above has eval set to "FALSE" as running this code each time the project is knitted would be time consuming and not needed as it has been previously exectued. 
 
 ## Execution Time! 
 
 Now that both `getStreetAddresses` and `callAPI` functions are created, we can create a data set of randomly selected addresses, call the Zillow API for each address, and write the final data frame to a CSV file. The `getStreetAddresses` is first called with 5000 desired address samples as the Zillow API only allows upto 5000 API calls a day. Then the vector of addresses is passed to `callAPI` function that returns a data set which is transformed into a data frame using the `data.frame` function. Finally, `write_csv` function outputs the data frame to a CSV file so it can be used in the analysis sections and not have the API called each time a tree is adjusted! 
 
-Note: The below R code has eval set to "FALSE" so that the API is not called each time an edit is made to the file. 
+__Note__: The below R code has eval set to "FALSE" so that the API is not called each time an edit is made to the file. 
 
 ```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 addressNames <- getStreetAddresses(5000)
@@ -206,7 +207,7 @@ Before fitting our tree models the data first needs to be analyzed to determine 
 * Grouping among categorical attributes
 * Transformations of attributes
 
-Note: The following columns cannot be used in predicting the estimate and will be initially removed before the analysis in each section:
+__Note__: The following columns cannot be used in predicting the estimate and will be initially removed before the analysis in each section:
 
 * Street number and name
 * Zipcode
@@ -240,7 +241,7 @@ When building a model for preciting a response, it is important to not include c
 
 Using the `plot` function we can see the relationships between each column and determine if any trends are present between multiple columns. 
 
-```{r plot_compare,fig.width = 15,fig.height = 15,echo=TRUE,warning=FALSE,message=FALSE}
+```{r plot_compare,fig.width = 15,fig.height = 15,echo=TRUE,warning=FALSE,message=FALSE, eval=FALSE}
 addressTrainNA <- addressTrainNA %>% filter(NA_Count == 0)
 addressTrainNA$useCode <- as.factor(addressTrainNA$useCode)
 addressTrainNA$regionType <- as.factor(addressTrainNA$regionType)
@@ -270,7 +271,7 @@ cor.test(addressTrainNA$bedrooms, addressTrainNA$bathrooms, method="pearson")
 The tests show a string positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also have a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models. 
 
 ```{r remove_bathrooms,echo=FALSE,warning=FALSE,message=FALSE}
-addresTrain <- addressTrain %>% select(-bathrooms)
+addressTrain <- addressTrain %>% select(-bathrooms)
 ```
 
 ### Clustered Data in a single area
@@ -286,14 +287,14 @@ knitr::kable(table(addressTrainNA$regionType))
 Due to lotSizeSqFt having a large IQR it appears that the `plot` function clustered all the large values to allow for the outliers to be displayed in the plot. As for taxAssessmentYear and regionType, both showed clustered values around a specific value (year = 2018) or group (type = neighborhood) and will not be included in the predictors for Zillow estimate. 
 
 ```{r remove_clustered,echo=FALSE,warning=FALSE,message=FALSE}
-addresTrain <- addressTrain %>% select(-taxAssessmentYear,-regionType)
+addressTrain <- addressTrain %>% select(-taxAssessmentYear,-regionType)
 ```
 
 ## Grouping among categorical attributes
 
 After removing regionType, the remaining categorical variables are useCode and regionName. In this section we explore if by category any certain groups have more insight into estimating the appraisal of an address. If the categories do not help in gaining a better model then should they be removed and why. To perform this analysis we can use the `ggplot2` function to compare the groups of each categorical variable to the estimates column. 
 
-Note: Used the `filter` function to remove amounts greater than fourty million as there were less than ten outliers that made the plots hard to read due to the adjustments of the extreme home values. 
+__Note__: Used the `filter` function to remove amounts greater than fourty million as there were less than ten outliers that made the plots hard to read due to the adjustments of the extreme home values. 
 
 ```{r group_plotting,fig.width = 15,fig.height = 15,echo=TRUE,warning=FALSE,message=FALSE}
 addressTrainNA <- addressTrainNA %>% filter(amount < 40000000)
@@ -308,7 +309,7 @@ gUC + geom_boxplot(fill = "white") + labs(title = "Boxplot for Use Code on Amoun
 From the Region Name plot we see that while a few regions have a large IQR with high home appraisals, most of the regions are below the five million dollar mark and have similar IQRs. Also there is no single region where most of the data is clustered allowing for the groups to be fairly divided. Due to these factors I will not include the regionName in the predictors as the classifications do not appear to yeild any benefit for modeling the response. However, the Use Code shows promise as the plot demonstrates a large clustering around single family homes. While all the IQRs, including single family, are in proximity of each other, there is no other classification that has as many data points as the single family case. Therefore, in the next section I will create a new variable soley for the single family home use code and drop the useCode column as it is now substituted by the new attribute. 
 
 ```{r remove_regaion_name,echo=FALSE,warning=FALSE,message=FALSE}
-addresTrain <- addressTrain %>% select(-regionName)
+addressTrain <- addressTrain %>% select(-regionName)
 ```
 
 ## Transformations of attributes
@@ -316,5 +317,46 @@ addresTrain <- addressTrain %>% select(-regionName)
 From the analysis in the above section, a new column will be created called "SingleFamily" where 1 will indicate that the address is a single family home style and 0 will indicate otherwise. Using the `mutate` function to create this new column:
 
 ```{r single_family,echo=TRUE,warning=FALSE,message=FALSE}
-addresTrain <- addressTrain %>% mutate(SingleFamily = ifelse(useCode == "SingleFamily",1,0)) %>% select(-useCode)
+addressTrain <- addressTrain %>% mutate(SingleFamily = ifelse(useCode == "SingleFamily",1,0)) %>% select(-useCode)
 ```
+
+## Final training data set
+
+After removing half the predictors that we started with and creating a new one, below is a sample display of our predictors, along with the response, after all NAs are removed! 
+
+```{r final_data_set,echo=TRUE,warning=FALSE,message=FALSE}
+addressTrain <- addressTrain %>% filter(!is.na(taxAssessment),!is.na(yearBuilt),!is.na(lotSizeSqFt),!is.na(finishedSqFt),!is.na(bedrooms),!is.na(amount),!is.na(SingleFamily))
+knitr::kable(head(addressTrain, n = 10))
+```
+
+# Ensemble model fit
+
+For the ensemble model, I plan to use all the predictors due to the following reasons:
+
+* taxAssessment - what the government deems the monetary value of the address can give insight as to what Zillow asses the address value to be
+* yearBuilt - a newer facility with more updated features will have a higher price tag and thereby can increase or decrease the Zilow estimate based on the year the facility was built
+* lotSizeSqFt - the amount of land associated with an address will either increase or descrease the value for each sqaure foot purchased
+* finishedSqFt - similar to the lot size, the amount of living space for an address can affect the price for each square foot attained
+* bedrooms - the number of bedrooms can determine how many individuals can live on the address and therefore can increase or decrease the cost
+* SingleFamily - with many of the properties seen in the above section to be a single family home, homes that fall into this category have a different price range when compared to those who do not
+
+When determining which ensemble model to use, I ruled out the Random Forest method because I will be using all the predictors and as seen in the __Attribute cleaning__ section there is no single predictor that has the strongest correlation with the response variable. Reviewing the bagging and boosting approaches, I felt that the bagging method where it takes the average of multiple trees to determine the response was more suited for this data set. Over the past two years my wife and I have been house hunting on Zillow with the following attributes:
+
+* yearBuilt - greater than 2005
+* lotSizeSqFt - less than 1 acre (or 43560 square feet)
+* finishedSqFt - between 1,200 and 1,600 square feet
+* bedrooms - a minimum of 3 bedrooms
+* SingleFamily - Yes (or a 1 for the data set)
+
+From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000. Due to my knowledge about homes displayed on Zillow lead me to remove the boosting method as an option due to it's Bayes style of creating trees. The boosting method of updating the posterier statistics for our prediction will obtain a distribution pattern with a large range of values but again from my experience of home searching most addresses with common attributes will have a smaller variation and be centered around a specific average.
+
+Now having decided to use the bagging method for my ensemble model, the below R code creates a prediction model using the `caret` package. The `train` function centers and scales each attribute along with using 10 fold cross validation repeated six times. 
+
+```{r bagged_tree,echo=TRUE,warning=FALSE,message=FALSE}
+controlTraining <- trainControl(method = "repeatedcv", number = 10, repeats = 6)
+baggedTreeFit <- train(amount ~., data = addressTrain, method = "treebag", trControl=controlTraining , preProcess = c("center", "scale"))
+```
+
+# Linear regression model
+
+
