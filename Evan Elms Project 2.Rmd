@@ -359,4 +359,34 @@ baggedTreeFit <- train(amount ~., data = addressTrain, method = "treebag", trCon
 
 # Linear regression model
 
+When deciding between a linear regression method or regression tree method, I opted to use the linear regression approach because most of the predictors have a linear relationship with the response. Below is my reasoning for each predictor I choose to use in the linear model:
 
+* taxAssessment - a larger estimate by the government should equate to a higher Zillow estimate which showcases a positive linear relationship as both entities review similar property values
+* yearBuilt - as the year built for an addresses increase to the present day, it will have a positive linear affect on the Zillow estimate
+* lotSizeSqFt - any attribute related to an increase in size for a property will have an upward, positive impact on the property value
+* finishedSqFt - just like lot size, any attribute related to an increase in size for a property will have an positive impact on the property value
+* bedrooms - as the number of living spaces increases so will the price of the propety, which leads to positive linear relationship
+
+The one attribute that I used in the ensemble method but not the linear regression will be the SingleFamily column. I created this new binary column to determine if a lot contains a single family unit but as seen numerious times in the course it is difficult to fit a linear model to a binary attribute. 
+
+Using the same control method of 10 fold cross validation as for the ensemble model, we again use the `caret` package to now create a linear regression model with the same preprocessing steps for each column.
+
+```{r linear_regressiom,echo=TRUE,warning=FALSE,message=FALSE}
+addressTrain <- addressTrain %>% select(-SingleFamily)
+linearRegressionFit <- train(amount ~., data = addressTrain, method = "lm", trControl=controlTraining , preProcess = c("center", "scale"))
+```
+
+# Testing the model predictions
+
+After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurment to determine the fitness of our models and see if they are to rigidly built on the training data, loosely defined where they offer not insight on the response, or somewhere in between. To perform this action, we will apply the `predict` function to each of the models then find the RMSE using the `mean` and `sqrt` functions. The final outcomes of each model will be displayed using the `kable` function. 
+
+```{r best_fit, echo=TRUE,warning=TRUE,message=FALSE}
+baggedPred <- predict(baggedTreeFit, newdata = dplyr::select(addressTest, -amount))
+lmPred <- predict(linearRegressionFit, newdata = dplyr::select(addressTest, -amount))
+baggedRMSE <- sqrt(mean((baggedPred-addressTest$amount)^2))
+lmRMSE <- sqrt(mean((classTreePred-addressTest$amount)^2))
+modelNames <- c("Bagged Tree","Linear Regression")
+modelRMSE <- c(baggedRMSE, lmRMSE)
+finalCompare <- data.frame(modelNames, modelRMSE)
+knitr::kable(finalCompare)
+```
