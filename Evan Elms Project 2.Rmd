@@ -324,7 +324,7 @@ addressTrain <- addressTrain %>% mutate(SingleFamily = ifelse(useCode == "Single
 
 After removing half the predictors that we started with and creating a new one, below is a sample display of our predictors, along with the response, after all NAs are removed! 
 
-```{r final_data_set,echo=TRUE,warning=FALSE,message=FALSE}
+```{r final_data_set,echo=TRUE,warning=TRUE,message=FALSE}
 addressTrain <- addressTrain %>% filter(!is.na(taxAssessment),!is.na(yearBuilt),!is.na(lotSizeSqFt),!is.na(finishedSqFt),!is.na(bedrooms),!is.na(amount),!is.na(SingleFamily))
 knitr::kable(head(addressTrain, n = 10))
 ```
@@ -352,7 +352,7 @@ From our experience and the area we are scoping out, addresses that meet the abo
 
 Now having decided to use the bagging method for my ensemble model, the below R code creates a prediction model using the `caret` package. The `train` function centers and scales each attribute along with using 10 fold cross validation repeated six times. 
 
-```{r bagged_tree,echo=TRUE,warning=FALSE,message=FALSE}
+```{r bagged_tree,echo=TRUE,warning=TRUE,message=FALSE}
 controlTraining <- trainControl(method = "repeatedcv", number = 10, repeats = 6)
 baggedTreeFit <- train(amount ~., data = addressTrain, method = "treebag", trControl=controlTraining , preProcess = c("center", "scale"))
 ```
@@ -371,7 +371,7 @@ The one attribute that I used in the ensemble method but not the linear regressi
 
 Using the same control method of 10 fold cross validation as for the ensemble model, we again use the `caret` package to now create a linear regression model with the same preprocessing steps for each column.
 
-```{r linear_regressiom,echo=TRUE,warning=FALSE,message=FALSE}
+```{r linear_regressiom,echo=TRUE,warning=TRUE,message=FALSE}
 addressTrain <- addressTrain %>% select(-SingleFamily)
 linearRegressionFit <- train(amount ~., data = addressTrain, method = "lm", trControl=controlTraining , preProcess = c("center", "scale"))
 ```
