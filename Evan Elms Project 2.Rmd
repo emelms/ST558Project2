@@ -318,6 +318,7 @@ From the analysis in the above section, a new column will be created called "Sin
 
 ```{r single_family,echo=TRUE,warning=FALSE,message=FALSE}
 addressTrain <- addressTrain %>% mutate(SingleFamily = ifelse(useCode == "SingleFamily",1,0)) %>% select(-useCode)
+addressTest <- addressTest %>% mutate(SingleFamily = ifelse(useCode == "SingleFamily",1,0))
 ```
 
 ## Final training data set
@@ -384,9 +385,19 @@ After fitting a bagged tree and linear regression model to our training data, we
 baggedPred <- predict(baggedTreeFit, newdata = dplyr::select(addressTest, -amount))
 lmPred <- predict(linearRegressionFit, newdata = dplyr::select(addressTest, -amount))
 baggedRMSE <- sqrt(mean((baggedPred-addressTest$amount)^2))
-lmRMSE <- sqrt(mean((classTreePred-addressTest$amount)^2))
+lmRMSE <- sqrt(mean((lmPred-addressTest$amount)^2))
 modelNames <- c("Bagged Tree","Linear Regression")
 modelRMSE <- c(baggedRMSE, lmRMSE)
 finalCompare <- data.frame(modelNames, modelRMSE)
 knitr::kable(finalCompare)
 ```
+
+# Conclusion
+
+## Model Results
+
+## Real world application
+
+When it comes to predicting the monetary value of a property everything from the stock market to government enactments can cause the value to change drastically in a single day. However, for our modeling purposes we focused on the data that rarely changes in a single day time and is easily understandable by almost anyone. I coud walk up to anyone and describe to them the size of a house, how much land comes with the property, the number of bedrooms and bathrooms in the home and they would be able to understand these values. Also informing them about what city and state the property is located would give them a reasonable idea about the cost of the home. For example, many people would know the cost of living in California is higher than in New Mexico. Rounding off the information with how much the government appraisal of the property, most individuals would be able to understand and offer their own estimate of a home based on the same information we used in our models. Not only is the data easy to understand but the precitors we reviewed are consistent and have very little fluctuation. How much land allocated to an address will not change between now and tomorrow, neither will the size of a home or the number of rooms. A home can be rebuilt or more land can be purchased from a neighboring property but these pivotal changes take time or happen at such a small rate that it would minimal impact our model prections. 
+
+The models we used to estimate the value of an address with the given predictors would be consistent and easy to interpret when working or presenting them to a wide range of groupes, like real estate agents or new home buyers. However, we could improve our models if we had access to historical data and could add trends or more in depth grouping of home types. The data set we collected had the amount for that given time frame, if we could automate and perform this analysis on a daily bases we could refit our models daily to become more capable of adjusting to trends and having better prediction rates. The models we used are a starting point for predicting the value of a home but we could furhter improve them over time if we had access to other data sets that affect the real world markets and trends that set monetary standards at a global and national stage. 
