@@ -2,7 +2,11 @@
 title: "Project 2"
 author: "Evan Elms"
 date: "6/24/2019"
-output: html_document
+output:  
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +18,18 @@ library(ZillowR)
 library(readr)
 library(caret)
 ```
+
+# GitHub Repository
+
+For this project, you can find my GitHub repository https://github.com/emelms/ST558Project2.
+
+# Introduction
+
+Since the mortgage crisis in 2008, property values have fluxuated over the past decade as consumers have been grapling with the financial burden of pursuing the "American Dream" and owning a home. As seen in this [article](https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02), home values recovered over a seven year period and became stabile in 2015; however in the past year the US market has seen a depreciation in property values. With owning a home being a vital goal of many US economy workers, we want to know how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms. 
+
+To determine if we can create a reasonable model for home estimates, we will be collecting realestate data from the most popular house hunting website [Zillow](https://www.zillow.com/). On their website, a house hunter can find mulitple key values about a property their seeking along with an appriasal value created by Zillow called [zestimate](https://www.zillow.com/zestimate/). In their description for creating this market value, Zillow factors in not only the characteristics of the property but alos historical market and trend data for homes in the neighboring area or have the same character features. The focus of our study is to determine how well we can fit different models based only on the basic features of the property along with it's location and value estimate provided by the government. 
+
+The models we will be using for this study will be the bagged tree and linear regression. From the surface, it seems that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that a bagged tree has a better fit using the predictors we selected. 
 
 # Get Addresses
 
@@ -241,7 +257,11 @@ When building a model for preciting a response, it is important to not include c
 
 Using the `plot` function we can see the relationships between each column and determine if any trends are present between multiple columns. 
 
-```{r plot_compare,fig.width = 15,fig.height = 15,echo=TRUE,warning=FALSE,message=FALSE, eval=FALSE}
+---
+Code comment: Used the as.factor function so the categorical variables could be used in the plot function. If not set, then the plot function will return an error. 
+---
+
+```{r plot_compare,fig.width = 15,fig.height = 15,echo=TRUE,warning=FALSE,message=FALSE}
 addressTrainNA <- addressTrainNA %>% filter(NA_Count == 0)
 addressTrainNA$useCode <- as.factor(addressTrainNA$useCode)
 addressTrainNA$regionType <- as.factor(addressTrainNA$regionType)
@@ -295,6 +315,10 @@ addressTrain <- addressTrain %>% select(-taxAssessmentYear,-regionType)
 After removing regionType, the remaining categorical variables are useCode and regionName. In this section we explore if by category any certain groups have more insight into estimating the appraisal of an address. If the categories do not help in gaining a better model then should they be removed and why. To perform this analysis we can use the `ggplot2` function to compare the groups of each categorical variable to the estimates column. 
 
 __Note__: Used the `filter` function to remove amounts greater than fourty million as there were less than ten outliers that made the plots hard to read due to the adjustments of the extreme home values. 
+
+---
+Code comment: Used the geom_boxplot and geom_jitter functions to create the design where the color is based on region name. Also removed the key legend as the output would shift the box plots and make them unreadable. 
+---
 
 ```{r group_plotting,fig.width = 15,fig.height = 15,echo=TRUE,warning=FALSE,message=FALSE}
 addressTrainNA <- addressTrainNA %>% filter(amount < 40000000)
@@ -395,6 +419,8 @@ knitr::kable(finalCompare)
 # Conclusion
 
 ## Model Results
+
+From the table above, the bagged tree model has an 8% smaller RMSE than the linear regression model. I initially thought that the linear regression model would be a better fit because many of the predictors appeared to have a linear relationship with the price tag of an address. From an economics design I believed that newer, larger, and more features on an item increased the price tag while a lack of these attributes leads to a decrease in price. However, from my analysis on each attribute and reviewing the plots in the __Attribute cleaning__ section I believe that a combination of these predictors could lead to a decrease in the linear relationship of the response column. The outcome of the RMSE shows that by using the bootstrap method to randomly create a series of trees and calculating the average among all the trees removes the strictness in the model set by the linear realtionship. From our testing the results show that the bagged tree model yields better prediction results for this real world estate problem as a combination of house variables can complicate the value of an address. 
 
 ## Real world application
 
