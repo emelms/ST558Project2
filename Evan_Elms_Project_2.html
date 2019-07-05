@@ -1555,9 +1555,9 @@ div.tocify {
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>Since the mortgage crisis in 2008, property values have fluctuated over the past decade as consumers have been grappling with the financial burden of pursuing the “American Dream” and owning a home. As seen in this <a href="https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02">article</a>, home values recovered over a seven year period and became stable in 2015; however, in the past year the US market has seen a depreciation in property values. With owning a home being a vital goal of many US economy workers, we want to know how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms.</p>
-<p>To determine if we can create a reasonable model for home estimates, we will be collecting real estate data from the most popular house hunting website <a href="https://www.zillow.com/">Zillow</a>. On their website, a house hunter can find multiple key values about a property they are seeking along with an appraisal value created by Zillow called <a href="https://www.zillow.com/zestimate/">zestimate</a>. In their description for creating this market value, Zillow factors in not only the characteristics of the property but also historical market and trend data for homes in the neighboring area or have the same character features. The focus of our study is to determine how well we can fit different models based only on the basic features of the property along with its location and value estimate provided by the government.</p>
-<p>The models we will be using for this study will be the bagged tree and linear regression. From the surface, it seems that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that a bagged tree has a better fit using the predictors we selected.</p>
+<p>Since the mortgage crisis in 2008, property values have fluctuated over the past decade as consumers have been grappling with the financial burden of pursuing the “American Dream” and owning a home. As seen in this <a href="https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02">article</a>, home values recovered over a seven year period and became stable in 2015; however, in the past year the US market has seen a depreciation in property values. The purpose of our study is to determine how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms.</p>
+<p>The method we will be using to collect the housing data will be querying a popular house hunting website <a href="https://www.zillow.com/">Zillow</a> through their APIs. Trying to predict the response variable called <a href="https://www.zillow.com/zestimate/">zestimate</a>, we will explore a series of models in the ensemble family and linear regression family in order to determine which family has a better prediction rate. After performing data analysis, we will select one modelling method from each group and compare their success rate by the root mean squared error of each prediction set.</p>
+<p>From the surface, it appears that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that an ensemble approach has a better fit using the predictors we selected. In our research we will find that as the complexity of the real world is factored in, a linear model is less suitable and an ensemble approach on the data set collected still has a large root mean square error as historical market trends or other outside factors are not included.</p>
 </div>
 <div id="get-addresses" class="section level1">
 <h1>Get Addresses</h1>
@@ -1650,7 +1650,7 @@ div.tocify {
 </div>
 <div id="function-to-extract-and-sample-the-data" class="section level2">
 <h2>Function to extract and sample the data</h2>
-<p>To extract a list of potential LA addresses, I created the function <code>getStreetAddresses</code> that has an input for the number of sample addresses the user wants returned. Using the <code>read_csv</code> function to first pull the data into R then leveraging the <code>paste</code> function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space separating each character column. The <code>sample</code> function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file.</p>
+<p>To extract a list of potential LA addresses, I created the function <code>getStreetAddresses</code> that has an input for the number of sample addresses the user wants returned. Using the <code>read_csv</code> function to first pull the data into R, I then leveraged the <code>paste</code> function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space separating each character column. The <code>sample</code> function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file.</p>
 <p><strong>Note</strong>: The below R code will not run as eval is set to “FALSE” since processing the data each time the project in knitted would be time consuming.</p>
 <pre class="r"><code>getStreetAddresses &lt;- function(numberOfAdr){
   allAddresses &lt;- read_csv(&quot;Addresses_in_the_City_of_Los_Angeles.csv&quot;)
@@ -1688,35 +1688,35 @@ div.tocify {
 <ul>
 <li>The City name within the LA county where the address resides</li>
 </ul></li>
-<li>use Code
+<li>Use Code
 <ul>
 <li>A code used to determine what the address is used for, like business or residential</li>
 </ul></li>
-<li>tax assessment year
+<li>Tax assessment year
 <ul>
 <li>The last year the address was appraised for tax purposes</li>
 </ul></li>
-<li>tax assessment value
+<li>Tax assessment value
 <ul>
 <li>The value of the property based on the tax assessment by the federal government</li>
 </ul></li>
-<li>year built
+<li>Year built
 <ul>
 <li>Year the building that resides on the address was built</li>
 </ul></li>
-<li>lot size
+<li>Lot size
 <ul>
 <li>A numeric value of how large the property size is</li>
 </ul></li>
-<li>finished square feet
+<li>Finished square feet
 <ul>
 <li>The square footage of livable or usable property on the address</li>
 </ul></li>
-<li>bathrooms
+<li>Bathrooms
 <ul>
 <li>The number of bathrooms located on the property</li>
 </ul></li>
-<li>bedrooms
+<li>Bedrooms
 <ul>
 <li>The number of bedrooms located on the property</li>
 </ul></li>
@@ -1724,11 +1724,11 @@ div.tocify {
 <ul>
 <li>The appraisal value for the address calculated by Zillow</li>
 </ul></li>
-<li>region name
+<li>Region name
 <ul>
 <li>Similar to the City attribute, the regional name Zillow associates with the address</li>
 </ul></li>
-<li>region type
+<li>Region type
 <ul>
 <li>Similar to the use Code attribute, the type of region Zillow associates with the address</li>
 </ul></li>
@@ -1992,7 +1992,7 @@ plot(addressTrainNA %&gt;% select(-NA_Count))</code></pre>
 ## sample estimates:
 ##       cor 
 ## 0.6790245</code></pre>
-<p>The tests show a string positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also having a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models.</p>
+<p>The tests show a strong positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also having a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models.</p>
 </div>
 <div id="clustered-data-in-a-single-area" class="section level3">
 <h3>Clustered Data in a single area</h3>
@@ -2177,7 +2177,7 @@ knitr::kable(head(addressTrain, n = 10))</code></pre>
 <li>bedrooms - a minimum of 3 bedrooms</li>
 <li>SingleFamily - Yes (or a 1 for the data set)</li>
 </ul>
-<p>From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000. My knowledge about homes displayed on Zillow led me to remove the boosting method as an option due to its Bayes style of creating trees. The boosting method of updating the posterior statistics for our prediction will obtain a distribution pattern with a large range of values, but again from my experience of home searching, most addresses with common attributes will have a smaller variation and be centered around a specific average.</p>
+<p>From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000 dollars. My knowledge about homes displayed on Zillow led me to remove the boosting method as an option due to its Bayes style of creating trees. The boosting method of updating the posterior statistics for our prediction will obtain a distribution pattern with a large range of values, but again from my experience of home searching, most addresses with common attributes will have a smaller variation and be centered around a specific average.</p>
 <p>Now having decided to use the bagging method for my ensemble model, the below R code creates a prediction model using the <code>caret</code> package. The <code>train</code> function centers and scales each attribute along with using 10 fold cross validation repeated six times.</p>
 <pre class="r"><code>controlTraining &lt;- trainControl(method = &quot;repeatedcv&quot;, number = 10, repeats = 6)
 baggedTreeFit &lt;- train(amount ~., data = addressTrain, method = &quot;treebag&quot;, trControl=controlTraining , preProcess = c(&quot;center&quot;, &quot;scale&quot;))</code></pre>
@@ -2199,7 +2199,7 @@ linearRegressionFit &lt;- train(amount ~., data = addressTrain, method = &quot;l
 </div>
 <div id="testing-the-model-predictions" class="section level1">
 <h1>Testing the model predictions</h1>
-<p>After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurement to determine the fitness of our models and see if they are to rigidly built on the training data, loosely defined where they offer no insight on the response, or somewhere in between. To perform this action, we will apply the <code>predict</code> function to each of the models then find the RMSE using the <code>mean</code> and <code>sqrt</code> functions. The final outcomes of each model will be displayed using the <code>kable</code> function.</p>
+<p>After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurement to determine if the fitness of our models are to rigidly built on the training data, loosely defined where they offer no insight on the response, or somewhere in between. To perform this action, we will apply the <code>predict</code> function to each of the models then find the RMSE using the <code>mean</code> and <code>sqrt</code> functions. The final outcomes of each model will be displayed using the <code>kable</code> function.</p>
 <pre class="r"><code>baggedPred &lt;- predict(baggedTreeFit, newdata = dplyr::select(addressTest, -amount))
 lmPred &lt;- predict(linearRegressionFit, newdata = dplyr::select(addressTest, -amount))
 baggedRMSE &lt;- sqrt(mean((baggedPred-addressTest$amount)^2))</code></pre>

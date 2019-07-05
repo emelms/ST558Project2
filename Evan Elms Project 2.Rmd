@@ -25,11 +25,11 @@ For this project, you can find my GitHub repository https://github.com/emelms/ST
 
 # Introduction
 
-Since the mortgage crisis in 2008, property values have fluctuated over the past decade as consumers have been grappling with the financial burden of pursuing the “American Dream” and owning a home. As seen in this [article](https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02), home values recovered over a seven year period and became stable in 2015; however, in the past year the US market has seen a depreciation in property values. With owning a home being a vital goal of many US economy workers, we want to know how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms.
+Since the mortgage crisis in 2008, property values have fluctuated over the past decade as consumers have been grappling with the financial burden of pursuing the “American Dream” and owning a home. As seen in this [article](https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02), home values recovered over a seven year period and became stable in 2015; however, in the past year the US market has seen a depreciation in property values. The purpose of our study is to determine how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms.
 
-To determine if we can create a reasonable model for home estimates, we will be collecting real estate data from the most popular house hunting website [Zillow](https://www.zillow.com/). On their website, a house hunter can find multiple key values about a property they are seeking along with an appraisal value created by Zillow called [zestimate](https://www.zillow.com/zestimate/). In their description for creating this market value, Zillow factors in not only the characteristics of the property but also historical market and trend data for homes in the neighboring area or have the same character features. The focus of our study is to determine how well we can fit different models based only on the basic features of the property along with its location and value estimate provided by the government.
+The method we will be using to collect the housing data will be querying a popular house hunting website [Zillow](https://www.zillow.com/) through their APIs. Trying to predict the response variable called [zestimate](https://www.zillow.com/zestimate/), we will explore a series of models in the ensemble family and linear regression family in order to determine which family has a better prediction rate. After performing data analysis, we will select one modelling method from each group and compare their success rate by the root mean squared error of each prediction set. 
 
-The models we will be using for this study will be the bagged tree and linear regression. From the surface, it seems that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that a bagged tree has a better fit using the predictors we selected.
+From the surface, it appears that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that an ensemble approach has a better fit using the predictors we selected. In our research we will find that as the complexity of the real world is factored in, a linear model is less suitable and an ensemble approach on the data set collected still has a large root mean square error as historical market trends or other outside factors are not included. 
 
 # Get Addresses
 
@@ -71,7 +71,7 @@ We can see that the HSE_NBR references the house number of a given address, STR_
 
 ## Function to extract and sample the data
 
-To extract a list of potential LA addresses, I created the function `getStreetAddresses` that has an input for the number of sample addresses the user wants returned. Using the `read_csv` function to first pull the data into R then leveraging the `paste` function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space separating each character column. The `sample` function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file.
+To extract a list of potential LA addresses, I created the function `getStreetAddresses` that has an input for the number of sample addresses the user wants returned. Using the `read_csv` function to first pull the data into R, I then leveraged the `paste` function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space separating each character column. The `sample` function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file.
 
 __Note__: The below R code will not run as eval is set to “FALSE” since processing the data each time the project in knitted would be time consuming.
 
@@ -106,27 +106,27 @@ The response from the API is an XML dump of all real estate data that Zillow has
     + Five digit number that represents which coded region of the LA county the address resides
 * City
     + The City name within the LA county where the address resides
-* use Code
+* Use Code
     + A code used to determine what the address is used for, like business or residential
-* tax assessment year
+* Tax assessment year
     + The last year the address was appraised for tax purposes
-* tax assessment value
+* Tax assessment value
     + The value of the property based on the tax assessment by the federal government
-* year built
+* Year built
     + Year the building that resides on the address was built
-* lot size
+* Lot size
     + A numeric value of how large the property size is
-* finished square feet
+* Finished square feet
     + The square footage of livable or usable property on the address
-* bathrooms
+* Bathrooms
     + The number of bathrooms located on the property
-* bedrooms
+* Bedrooms
     + The number of bedrooms located on the property
 * Zillow estimate amount
     + The appraisal value for the address calculated by Zillow
-* region name
+* Region name
     + Similar to the City attribute, the regional name Zillow associates with the address
-* region type
+* Region type
     + Similar to the use Code attribute, the type of region Zillow associates with the address
 
 Due to the response not being in a data frame format fitting for R, we will use the `XML` package to parse through all the data and collect the valuable attributes for each address. Before and after parsing the output, the functions `is.null` and `is.na` will be used to validate that Zillow has an estimated appraisal of the address since the estimate is our response variable that we want to predict.
@@ -288,7 +288,7 @@ cor.test(addressTrainNA$finishedSqFt, addressTrainNA$bedrooms, method="pearson")
 cor.test(addressTrainNA$bedrooms, addressTrainNA$bathrooms, method="pearson")
 ```
 
-The tests show a string positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also having a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models. 
+The tests show a strong positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also having a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models. 
 
 ```{r remove_bathrooms,echo=FALSE,warning=FALSE,message=FALSE}
 addressTrain <- addressTrain %>% select(-bathrooms)
@@ -373,7 +373,7 @@ When determining which ensemble model to use, I ruled out the Random Forest meth
 * bedrooms - a minimum of 3 bedrooms
 * SingleFamily - Yes (or a 1 for the data set)
 
-From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000. My knowledge about homes displayed on Zillow led me to remove the boosting method as an option due to its Bayes style of creating trees. The boosting method of updating the posterior statistics for our prediction will obtain a distribution pattern with a large range of values, but again from my experience of home searching, most addresses with common attributes will have a smaller variation and be centered around a specific average.
+From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000 dollars. My knowledge about homes displayed on Zillow led me to remove the boosting method as an option due to its Bayes style of creating trees. The boosting method of updating the posterior statistics for our prediction will obtain a distribution pattern with a large range of values, but again from my experience of home searching, most addresses with common attributes will have a smaller variation and be centered around a specific average.
 
 Now having decided to use the bagging method for my ensemble model, the below R code creates a prediction model using the `caret` package. The `train` function centers and scales each attribute along with using 10 fold cross validation repeated six times.
 
@@ -403,7 +403,7 @@ linearRegressionFit <- train(amount ~., data = addressTrain, method = "lm", trCo
 
 # Testing the model predictions
 
-After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurement to determine the fitness of our models and see if they are to rigidly built on the training data, loosely defined where they offer no insight on the response, or somewhere in between. To perform this action, we will apply the `predict` function to each of the models then find the RMSE using the `mean` and `sqrt` functions. The final outcomes of each model will be displayed using the `kable` function.
+After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurement to determine if the fitness of our models are to rigidly built on the training data, loosely defined where they offer no insight on the response, or somewhere in between. To perform this action, we will apply the `predict` function to each of the models then find the RMSE using the `mean` and `sqrt` functions. The final outcomes of each model will be displayed using the `kable` function.
 
 ```{r best_fit, echo=TRUE,warning=TRUE,message=FALSE}
 baggedPred <- predict(baggedTreeFit, newdata = dplyr::select(addressTest, -amount))
