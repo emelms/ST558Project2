@@ -25,17 +25,17 @@ For this project, you can find my GitHub repository https://github.com/emelms/ST
 
 # Introduction
 
-Since the mortgage crisis in 2008, property values have fluxuated over the past decade as consumers have been grapling with the financial burden of pursuing the "American Dream" and owning a home. As seen in this [article](https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02), home values recovered over a seven year period and became stabile in 2015; however in the past year the US market has seen a depreciation in property values. With owning a home being a vital goal of many US economy workers, we want to know how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms. 
+Since the mortgage crisis in 2008, property values have fluctuated over the past decade as consumers have been grappling with the financial burden of pursuing the “American Dream” and owning a home. As seen in this [article](https://www.marketwatch.com/story/home-prices-accelerate-for-the-first-time-in-a-while-2019-07-02), home values recovered over a seven year period and became stable in 2015; however, in the past year the US market has seen a depreciation in property values. With owning a home being a vital goal of many US economy workers, we want to know how well we can predict the value of a home solely based on key attributes about the property like the square footage or number of rooms.
 
-To determine if we can create a reasonable model for home estimates, we will be collecting realestate data from the most popular house hunting website [Zillow](https://www.zillow.com/). On their website, a house hunter can find mulitple key values about a property their seeking along with an appriasal value created by Zillow called [zestimate](https://www.zillow.com/zestimate/). In their description for creating this market value, Zillow factors in not only the characteristics of the property but alos historical market and trend data for homes in the neighboring area or have the same character features. The focus of our study is to determine how well we can fit different models based only on the basic features of the property along with it's location and value estimate provided by the government. 
+To determine if we can create a reasonable model for home estimates, we will be collecting real estate data from the most popular house hunting website [Zillow](https://www.zillow.com/). On their website, a house hunter can find multiple key values about a property they are seeking along with an appraisal value created by Zillow called [zestimate](https://www.zillow.com/zestimate/). In their description for creating this market value, Zillow factors in not only the characteristics of the property but also historical market and trend data for homes in the neighboring area or have the same character features. The focus of our study is to determine how well we can fit different models based only on the basic features of the property along with its location and value estimate provided by the government.
 
-The models we will be using for this study will be the bagged tree and linear regression. From the surface, it seems that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that a bagged tree has a better fit using the predictors we selected. 
+The models we will be using for this study will be the bagged tree and linear regression. From the surface, it seems that the most common predictors like the number of rooms or lot size would have a positive linear relationship on the property value as they increase in size or quantity. By this logic a linear regression model is the likely winner however we soon find that a bagged tree has a better fit using the predictors we selected.
 
 # Get Addresses
 
 ## About the data
 
-Before calling Zillow's Realestate APIs, we must first gather all possible addresses in the Las Angeles county area. Since the Bureau of Engineering maintains a [list of all registered LA addresses](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/e922beea-6b7a-46ab-a3fb-536dd3f6fdd5), we can download the comma-seperated values (CSV) file and extract the 1,002,025 addresses. In this file we find the following columns:  
+Before calling Zillow’s Real Estate APIs, we must first gather all possible addresses in the Los Angeles county area. Since the Bureau of Engineering maintains a [list of all registered LA addresses](https://catalog.data.gov/dataset/addresses-in-the-city-of-los-angeles/resource/e922beea-6b7a-46ab-a3fb-536dd3f6fdd5), we can download the comma-separated values (CSV) file and extract the 1,002,025 addresses. In this file we find the following columns: 
 
 * HSE_ID
 * PIN
@@ -67,13 +67,13 @@ someAddresses <- read_csv("Addresses_in_the_City_of_Los_Angeles.csv")
 knitr::kable(head((someAddresses %>% select(HSE_NBR, STR_NM, STR_SFX_CD)),n = 10))
 ```
 
-We can see that the HSE_NBR references the house number of a given address, STR_NM is the street name, and the STR_SFX_CD is the street suffix code determining what type of street the address resides on. There was an additional column HSE_DIR_CD that referenced the house directional code and contained N, S, E, or W but when I sampled a few addresses and input them into Zillow I found that the directional code was not needed to obtain realestate information on the sampled address.
+We can see that the HSE_NBR references the house number of a given address, STR_NM is the street name, and the STR_SFX_CD is the street suffix code determining what type of street the address resides on. There was an additional column HSE_DIR_CD that referenced the house directional code and contained N, S, E, or W but when I sampled a few addresses and input them into Zillow I found that the directional code was not needed to obtain real estate information on the sampled address.
 
 ## Function to extract and sample the data
 
-To extract a list of potential LA addresses, I created the function `getStreetAddresses` that has an input for the number of sample addresses the user wants returned. Using the `read_csv` function to first pull the data into R then leveraging the `paste` function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space seperating each character column. The `sample` function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file. 
+To extract a list of potential LA addresses, I created the function `getStreetAddresses` that has an input for the number of sample addresses the user wants returned. Using the `read_csv` function to first pull the data into R then leveraging the `paste` function to extract the columns HSE_NBR, STR_NM, and STR_SFX_CD with a space separating each character column. The `sample` function then takes the user input on number of randomly selected addresses to finally return a list addresses from the original 1,002,025 observations on file.
 
-__Note__: The below R code will not run as eval is set to "FALSE" since processing the data each time the project in knited would be time consuming. 
+__Note__: The below R code will not run as eval is set to “FALSE” since processing the data each time the project in knitted would be time consuming.
 
 ```{r get_addresses, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 getStreetAddresses <- function(numberOfAdr){
@@ -88,32 +88,32 @@ getStreetAddresses <- function(numberOfAdr){
 
 ## Querying the API
 
-After creating a data set of LA county addresses from the previous function, we can use the `ZillowR` package to call the Zillow API [GetDeepSearchResults](https://www.zillow.com/howto/api/GetDeepSearchResults.htm) that will return all attributes Zillow has about the provided address. To call this API we will provide the followingL
+After creating a data set of LA county addresses from the previous function, we can use the `ZillowR` package to call the Zillow API  [GetDeepSearchResults](https://www.zillow.com/howto/api/GetDeepSearchResults.htm) that will return all attributes Zillow has about the provided address. To call this API we will provide the following:
 
 * Address Name
 * City and State Name
 * ZWS ID
 
-For all calls to the API, the City and State Name will remain the same as the addresses were pulled only from the LA county data set. The ZWS ID will also remain the same for each `GET` as this is a unique ID created for each user who wants to call the API. The Address Name will change for each service call by looping through the list of randomly selected addresses. 
+For all calls to the API, the City and State Name will remain the same as the addresses were pulled only from the LA county data set. The ZWS ID will also remain the same for each `GET` as this is a unique ID created for each user who wants to call the API. The Address Name will change for each service call by looping through the list of randomly selected addresses.
 
 ## Address Data
 
-The response from the API is an `XML` dump of all realestate data that Zillow has aquired on the address provided by the user. While we could use and analyze all attributes provided, for this project we will focus on the following:
+The response from the API is an XML dump of all real estate data that Zillow has acquired on the address provided by the user. While we could use and analyze all attributes provided, for this project we will focus on the following:
 
 * Street number and name
     + Address information obtained in the previous step and reflected back from the API call
-* Zipcode
+* Zip Code
     + Five digit number that represents which coded region of the LA county the address resides
 * City
     + The City name within the LA county where the address resides
 * use Code
     + A code used to determine what the address is used for, like business or residential
 * tax assessment year
-    + The last year the address was apraised for tax purposes
+    + The last year the address was appraised for tax purposes
 * tax assessment value
     + The value of the property based on the tax assessment by the federal government
 * year built
-    + Year the building that resides on the address was buit
+    + Year the building that resides on the address was built
 * lot size
     + A numeric value of how large the property size is
 * finished square feet
@@ -128,29 +128,29 @@ The response from the API is an `XML` dump of all realestate data that Zillow ha
     + Similar to the City attribute, the regional name Zillow associates with the address
 * region type
     + Similar to the use Code attribute, the type of region Zillow associates with the address
-    
-Due to the response not being in a data frame format fitting for R, we will use the `XML` package to parse through all the data and collect the valuable attributes for each address. Before and after parsing the output, the functions `is.null` and `is.na` will be used to validate that Zillow has an estimated appriasal of the address since the estimate is our response variable that we want to predict.
+
+Due to the response not being in a data frame format fitting for R, we will use the `XML` package to parse through all the data and collect the valuable attributes for each address. Before and after parsing the output, the functions `is.null` and `is.na` will be used to validate that Zillow has an estimated appraisal of the address since the estimate is our response variable that we want to predict.
 
 ## Processing all home data
 
-Since I do not have unlimited time to call the Zillow API manually for each address, I created the function `callAPI` with an input parameter as a character vector of addresses and returns a data set of all succesful API responses containing the desired columns listed above. To achieve this fleet of looping through and validating all API responses, I used the packages `tidyverse`, `XML` and `ZillowR` along with two `for loops`. The following steps outline what operations the function performs:
+Since I do not have unlimited time to call the Zillow API manually for each address, I created the function `callAPI` with an input parameter as a character vector of addresses and returns a data set of all successful API responses containing the desired columns listed above. To achieve this fleet of looping through and validating all API responses, I used the packages `tidyverse`, `XML` and `ZillowR` along with two `for loops`. The following steps outline what operations the function performs:
 
-1. Using the `read_file` function to pull my Zillow ID, used to identify whose calling the API, and storing that in a variable `myZillowID`
-2. Create a character vector of attribute names found in the resopnse XML called `attrNames`
+1. Using the `read_file` function to pull my Zillow ID, used to identify who's calling the API, and storing that in a variable `myZillowID`
+2. Create a character vector of attribute names found in the response XML called `attrNames`
 3. Create an empty vector called `allHomes` that will store all valid addresses and return them after all processes are complete
 4. Outer `for loop` cycles through each address in the character vector passed by the user
 5. Use the `GetDeepSearchResults` function to call the Zillow API with the current address iteration and store the response in `housingLAData`
 6. Have the `dput` function pull only the API response out and store it in `xmlHomeResponse`
 7. `If` statement validates that the response was not null and that the Zillow estimate is not missing
     + If either condition is TRUE then the `next` function cycles to the next address in the vector
-8. A vector of NAs called `currentHome` is temporarly created to store home attributes for the current iteration
+8. A vector of NAs called `currentHome` is temporarily created to store home attributes for the current iteration
 9. Inner `for loop` processes each column attribute in the `attrNames` vector and store it in `currentHome`
-10. Using the `getNodeSet` function to grab the each iteration of column values from the XML response and storing it in `attributeValue`
+10. Using the `getNodeSet` function to grab each iteration of column values from the XML response and storing it in `attributeValue`
 11. `Ifelse` statement validates the attribute value is not null and stores either the attribute value or NA based on the logical condition
 12. After the inner `for loop` completes, both the region name and type are stored in `currentHome` as these attributes are formatted differently
-13. Another `If` statment validates that the Zillow estimate is not NA using the `is.na` function as Zillow can send unknown or unpredicted responses
-    + If the condition is meet, then the current address is added to the final list using the `rbind` function
-14. The outer `for loop` repeates Steps 5 - 13 for each observation in the address vector
+13. Another `If` statement validates that the Zillow estimate is not NA using the `is.na` function as Zillow can send unknown or unpredicted responses
+    + If the condition is met, then the current address is added to the final list using the `rbind` function
+14. The outer `for loop` repeats Steps 5 - 13 for each observation in the address vector
 15. Before returning the final list, the first row is removed as it was used to instantiate the data frame but is not required for the user
 16. Using the `rownames` function to set all rows to null and `colnames` function to set all column names for the final data set
 17. `Return` function is used to deliver the complete data frame to the user
@@ -184,13 +184,13 @@ callAPI <- function(addressNames){
 }
 ```
 
-__Note__: R code above has eval set to "FALSE" as running this code each time the project is knitted would be time consuming and not needed as it has been previously exectued. 
+__Note__: R code above has eval set to “FALSE” as running this code each time the project is knitted would be time consuming and not needed as it has been previously executed.
 
 ## Execution Time! 
 
-Now that both `getStreetAddresses` and `callAPI` functions are created, we can create a data set of randomly selected addresses, call the Zillow API for each address, and write the final data frame to a CSV file. The `getStreetAddresses` is first called with 5000 desired address samples as the Zillow API only allows upto 5000 API calls a day. Then the vector of addresses is passed to `callAPI` function that returns a data set which is transformed into a data frame using the `data.frame` function. Finally, `write_csv` function outputs the data frame to a CSV file so it can be used in the analysis sections and not have the API called each time a tree is adjusted! 
+Now that both `getStreetAddresses` and `callAPI` functions are created, we can create a data set of randomly selected addresses, call the Zillow API for each address, and write the final data frame to a CSV file. The `getStreetAddresses` is first called with 5000 desired address samples as the Zillow API only allows up to 5000 API calls a day. Then the vector of addresses is passed to `callAPI` function that returns a data set which is transformed into a data frame using the `data.frame` function. Finally, `write_csv` function outputs the data frame to a CSV file so it can be used in the analysis sections and not have the API called each time a tree is adjusted!
 
-__Note__: The below R code has eval set to "FALSE" so that the API is not called each time an edit is made to the file. 
+__Note__: The below R code has eval set to “FALSE” so that the API is not called each time an edit is made to the file.
 
 ```{r collect_stree_data, echo=TRUE,warning=FALSE,message=FALSE,eval=FALSE}
 addressNames <- getStreetAddresses(5000)
@@ -201,9 +201,9 @@ write_csv(finalHomeList, path = "HomeDataLA.csv")
 
 # Data split
 
-Since the response column "amount" is already cleaned and verified to have no NA observations in the `callAPI` function, we can simply use the `sample` and `setdiff` function to split the data where 80% is used for training our models and 20% is used for testing our trees. After using the `read_csv` function to pull the data from the API function above and setting the seed for future test cases, the `sample` function randomly selects 80% of the rows with the help of the `nrow` function to determine how many observations are in the data set. Then the `setdiff` function sets all observations not in the training set to the test bracket. All the training data is pulled from the main data set and stored in `addressTrain` while the test data set in the same method is stored in `addressTest`.
+Since the response column “amount” is already cleaned and verified to have no NA observations in the `callAPI` function, we can simply use the `sample` and `setdiff` function to split the data where 80% is used for training our models and 20% is used for testing our trees. After using the `read_csv` function to pull the data from the API function above and setting the seed for future test cases, the `sample` function randomly selects 80% of the rows with the help of the `nrow` function to determine how many observations are in the data set. Then the `setdiff` function sets all observations not in the training set to the test bracket. All the training data is pulled from the main data set and stored in `addressTrain` while the test data set in the same method is stored in `addressTest`.
 
-For this sample testing, the CSV file "HomeDataLA" has 3164 observations where 2531 observations will be used for training and the remaining 632 records will be used to test the models at the end. 
+For this sample testing, the CSV file “HomeDataLA” has 3164 observations where 2531 observations will be used for training and the remaining 632 records will be used to test the models at the end.
 
 ```{r split_data, echo=TRUE,warning=FALSE,message=FALSE}
 addressData <- read_csv("HomeDataLA.csv")
@@ -216,7 +216,7 @@ addressTest <- addressData[test, ]
 
 # Data preprocessing
 
-Before fitting our tree models the data first needs to be analyzed to determine if any transformations or removal of either certain groups or columns is required to optimally predict the Zillow estimate. Before building our tree models we will perform the following analysis:
+Before fitting our tree models, the data first needs to be analyzed to determine if any transformations or removal of either certain groups or columns is required to optimally predict the Zillow estimate. Before building our tree models we will perform the following analysis:
 
 * Observation cleaning
 * Attribute cleaning
@@ -235,7 +235,7 @@ addressTrain <- addressTrain %>% select (-street, -zipcode, -city)
 
 ## Observation cleaning
 
-Once the data is simplified and the given columns are selected for the modeling process, any observation with a NA will be removed. Before this step I wanted to look at a higher level and see how the training data is currently. In the R code below I created an additional column called "NA_Count" using the `apply` function to determine what number observations have no NAs. 
+Once the data is simplified and the given columns are selected for the modeling process, any observation with a NA will be removed. Before this step I wanted to look at a higher level and see how the training data is currently. In the R code below I created an additional column called “NA_Count” using the `apply` function to determine what number of observations have no NAs.
 
 ```{r na_count, echo=TRUE,warning=FALSE,message=FALSE}
 addressTrainNA <- addressTrain
@@ -243,7 +243,7 @@ addressTrainNA$NA_Count <- apply(addressTrainNA, 1, function(r) sum(is.na(r)))
 knitr::kable(addressTrainNA %>% count(NA_Count))
 ```
 
-From the table we find that of the 2,531 observations in the training set 90% have no NAs. We can further see what columns have the most NAs again using the `sapply` function:
+From the table we find that of the 2,531 observations in the training set, 90% have no NAs. We can further see what columns have the most NAs again using the `sapply` function:
 
 ```{r na_col_count, echo=TRUE,warning=FALSE,message=FALSE}
 knitr::kable(sapply(addressTrain, function(c) sum(is.na(c))))
@@ -253,7 +253,7 @@ While no single quantitative column, among the seven that have NAs, has the larg
 
 ## Attribute cleaning
 
-When building a model for preciting a response, it is important to not include columns that tell the same story (have a correlation) or do not contribute any value to the response variable. In this section we review the column correlations to determine if any can be removed while also considering if there are any columns that have no value in determining the value of an address.
+When building a model for predicting a response, it is important to not include columns that tell the same story (have a correlation) or do not contribute any value to the response variable. In this section we review the column correlations to determine if any can be removed while also considering if there are any columns that have no value in determining the value of an address.
 
 Using the `plot` function we can see the relationships between each column and determine if any trends are present between multiple columns. 
 
@@ -271,8 +271,8 @@ plot(addressTrainNA %>% select(-NA_Count))
 
 From the output above I found the following trends taking place:
 
-1. There is a correlation between the variables finishedSqFt, bathrooms, and bedrooms
-2. The attributes taxAssessmentYear, lotSizeSqFt, and regionType have most of the observations in a single area
+1. There is a correlation between the variables finishedSqFt, bathrooms, and bedrooms.
+2. The attributes taxAssessmentYear, lotSizeSqFt, and regionType have most of the observations in a single area.
 
 ### Correlation Trend
 
@@ -288,7 +288,7 @@ cor.test(addressTrainNA$finishedSqFt, addressTrainNA$bedrooms, method="pearson")
 cor.test(addressTrainNA$bedrooms, addressTrainNA$bathrooms, method="pearson")
 ```
 
-The tests show a string positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also have a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models. 
+The tests show a string positive correlation between finishedSqFt and bathrooms at 0.77, with bedroom also having a strong correlation with bathrooms at 0.68. Due to the strong correlation with the finishedSqFt attribute, I will not use bathrooms in my predictive models. 
 
 ```{r remove_bathrooms,echo=FALSE,warning=FALSE,message=FALSE}
 addressTrain <- addressTrain %>% select(-bathrooms)
@@ -296,7 +296,7 @@ addressTrain <- addressTrain %>% select(-bathrooms)
 
 ### Clustered Data in a single area
 
-The other major trend was noticeably how some of the attributes in the plots had a solid black line when mapped to other columns. For taxAssessmentYear, lotSizeSqFt, and regionType we can use the `summary` function to determine the quantiles for the quantitative variables and `table` for the categorical variable. If the data is clustered in single area the IQR will be minimal or the counts for a given category will have a peak. The below outputs show the quantiles for taxAssesmentYeat and lotSizeSqFt while the final display is for the counts in the regionType category. 
+The other major trend was noticeably how some of the attributes in the plots had a solid black line when mapped to other columns. For taxAssessmentYear, lotSizeSqFt, and regionType we can use the `summary` function to determine the quantiles for the quantitative variables and `table` for the categorical variable. If the data is clustered in single area the IQR will be minimal or the counts for a given category will have a peak. The below outputs show the quantiles for taxAssesmentYeat and lotSizeSqFt while the final display is for the counts in the regionType category.
 
 ```{r clustered_trend,echo=TRUE,warning=FALSE,message=FALSE}
 summary(addressTrainNA$taxAssessmentYear)
@@ -304,7 +304,7 @@ summary(addressTrainNA$lotSizeSqFt)
 knitr::kable(table(addressTrainNA$regionType))
 ```
 
-Due to lotSizeSqFt having a large IQR it appears that the `plot` function clustered all the large values to allow for the outliers to be displayed in the plot. As for taxAssessmentYear and regionType, both showed clustered values around a specific value (year = 2018) or group (type = neighborhood) and will not be included in the predictors for Zillow estimate. 
+Due to lotSizeSqFt having a large IQR it appears that the `plot` function clustered all the large values to allow for the outliers to be displayed in the plot. As for taxAssessmentYear and regionType, both showed clustered values around a specific value (year = 2018) or group (type = neighborhood) and will not be included in the predictors for Zillow estimate.
 
 ```{r remove_clustered,echo=FALSE,warning=FALSE,message=FALSE}
 addressTrain <- addressTrain %>% select(-taxAssessmentYear,-regionType)
@@ -312,9 +312,9 @@ addressTrain <- addressTrain %>% select(-taxAssessmentYear,-regionType)
 
 ## Grouping among categorical attributes
 
-After removing regionType, the remaining categorical variables are useCode and regionName. In this section we explore if by category any certain groups have more insight into estimating the appraisal of an address. If the categories do not help in gaining a better model then should they be removed and why. To perform this analysis we can use the `ggplot2` function to compare the groups of each categorical variable to the estimates column. 
+After removing regionType, the remaining categorical variables are useCode and regionName. In this section we explore if by category any certain groups have more insight into estimating the appraisal of an address. If the categories do not help in gaining a better model then should they be removed and why. To perform this analysis we can use the `ggplot2` function to compare the groups of each categorical variable to the estimates column.
 
-__Note__: Used the `filter` function to remove amounts greater than fourty million as there were less than ten outliers that made the plots hard to read due to the adjustments of the extreme home values. 
+__Note__: Used the `filter` function to remove amounts greater than forty million as there were less than ten outliers that made the plots hard to read due to the adjustment of the extreme home values.
 
 ---
 Code comment: Used the geom_boxplot and geom_jitter functions to create the design where the color is based on region name. Also removed the key legend as the output would shift the box plots and make them unreadable. 
@@ -330,7 +330,7 @@ gUC + geom_boxplot(fill = "white") + labs(title = "Boxplot for Use Code on Amoun
   geom_jitter(aes(color = useCode), show.legend=FALSE) + coord_flip()
 ```
 
-From the Region Name plot we see that while a few regions have a large IQR with high home appraisals, most of the regions are below the five million dollar mark and have similar IQRs. Also there is no single region where most of the data is clustered allowing for the groups to be fairly divided. Due to these factors I will not include the regionName in the predictors as the classifications do not appear to yeild any benefit for modeling the response. However, the Use Code shows promise as the plot demonstrates a large clustering around single family homes. While all the IQRs, including single family, are in proximity of each other, there is no other classification that has as many data points as the single family case. Therefore, in the next section I will create a new variable soley for the single family home use code and drop the useCode column as it is now substituted by the new attribute. 
+From the Region Name plot we see that while a few regions have a large IQR with high home appraisals, most of the regions are below the five million dollar mark and have similar IQRs. Also there is no single region where most of the data is clustered allowing for the groups to be fairly divided. Due to these factors I will not include the regionName in the predictors as the classifications do not appear to yield any benefit for modeling the response. However, the Use Code shows promise as the plot demonstrates a large clustering around single family homes. While all the IQRs, including single family, are in proximity of each other, there is no other classification that has as many data points as the single family case. Therefore, in the next section I will create a new variable solely for the single family home use code and drop the useCode column as it is now substituted by the new attribute.
 
 ```{r remove_regaion_name,echo=FALSE,warning=FALSE,message=FALSE}
 addressTrain <- addressTrain %>% select(-regionName)
@@ -338,7 +338,7 @@ addressTrain <- addressTrain %>% select(-regionName)
 
 ## Transformations of attributes
 
-From the analysis in the above section, a new column will be created called "SingleFamily" where 1 will indicate that the address is a single family home style and 0 will indicate otherwise. Using the `mutate` function to create this new column:
+From the analysis in the above section, a new column will be created called “SingleFamily” where 1 will indicate that the address is a single family home style and 0 will indicate otherwise. Using the `mutate` function to create this new column:
 
 ```{r single_family,echo=TRUE,warning=FALSE,message=FALSE}
 addressTrain <- addressTrain %>% mutate(SingleFamily = ifelse(useCode == "SingleFamily",1,0)) %>% select(-useCode)
@@ -358,12 +358,12 @@ knitr::kable(head(addressTrain, n = 10))
 
 For the ensemble model, I plan to use all the predictors due to the following reasons:
 
-* taxAssessment - what the government deems the monetary value of the address can give insight as to what Zillow asses the address value to be
-* yearBuilt - a newer facility with more updated features will have a higher price tag and thereby can increase or decrease the Zilow estimate based on the year the facility was built
-* lotSizeSqFt - the amount of land associated with an address will either increase or descrease the value for each sqaure foot purchased
-* finishedSqFt - similar to the lot size, the amount of living space for an address can affect the price for each square foot attained
-* bedrooms - the number of bedrooms can determine how many individuals can live on the address and therefore can increase or decrease the cost
-* SingleFamily - with many of the properties seen in the above section to be a single family home, homes that fall into this category have a different price range when compared to those who do not
+* taxAssessment - what the government deems the monetary value of the address can give insight as to what Zillow assesses the address value to be.
+* yearBuilt - a newer facility with more updated features will have a higher price tag and thereby can increase or decrease the Zillow estimate based on the year the facility was built.
+* lotSizeSqFt - the amount of land associated with an address will either increase or decrease the value for each square foot purchased.
+* finishedSqFt - similar to the lot size, the amount of living space for an address can affect the price for each square foot attained.
+* bedrooms - the number of bedrooms can determine how many individuals can live on the address and therefore can increase or decrease the cost.
+* SingleFamily - with many of the properties seen in the above section to be a single family home, homes that fall into this category have a different price range when compared to those who do not.
 
 When determining which ensemble model to use, I ruled out the Random Forest method because I will be using all the predictors and as seen in the __Attribute cleaning__ section there is no single predictor that has the strongest correlation with the response variable. Reviewing the bagging and boosting approaches, I felt that the bagging method where it takes the average of multiple trees to determine the response was more suited for this data set. Over the past two years my wife and I have been house hunting on Zillow with the following attributes:
 
@@ -373,9 +373,9 @@ When determining which ensemble model to use, I ruled out the Random Forest meth
 * bedrooms - a minimum of 3 bedrooms
 * SingleFamily - Yes (or a 1 for the data set)
 
-From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000. Due to my knowledge about homes displayed on Zillow lead me to remove the boosting method as an option due to it's Bayes style of creating trees. The boosting method of updating the posterier statistics for our prediction will obtain a distribution pattern with a large range of values but again from my experience of home searching most addresses with common attributes will have a smaller variation and be centered around a specific average.
+From our experience and the area we are scoping out, addresses that meet the above criteria on average will have a Zillow estimate between 250,000 and 300,000. My knowledge about homes displayed on Zillow led me to remove the boosting method as an option due to its Bayes style of creating trees. The boosting method of updating the posterior statistics for our prediction will obtain a distribution pattern with a large range of values, but again from my experience of home searching, most addresses with common attributes will have a smaller variation and be centered around a specific average.
 
-Now having decided to use the bagging method for my ensemble model, the below R code creates a prediction model using the `caret` package. The `train` function centers and scales each attribute along with using 10 fold cross validation repeated six times. 
+Now having decided to use the bagging method for my ensemble model, the below R code creates a prediction model using the `caret` package. The `train` function centers and scales each attribute along with using 10 fold cross validation repeated six times.
 
 ```{r bagged_tree,echo=TRUE,warning=TRUE,message=FALSE}
 controlTraining <- trainControl(method = "repeatedcv", number = 10, repeats = 6)
@@ -384,15 +384,15 @@ baggedTreeFit <- train(amount ~., data = addressTrain, method = "treebag", trCon
 
 # Linear regression model
 
-When deciding between a linear regression method or regression tree method, I opted to use the linear regression approach because most of the predictors have a linear relationship with the response. Below is my reasoning for each predictor I choose to use in the linear model:
+When deciding between a linear regression method or regression tree method, I opted to use the linear regression approach because most of the predictors have a linear relationship with the response. Below is my reasoning for each predictor I chose to use in the linear model:
 
-* taxAssessment - a larger estimate by the government should equate to a higher Zillow estimate which showcases a positive linear relationship as both entities review similar property values
-* yearBuilt - as the year built for an addresses increase to the present day, it will have a positive linear affect on the Zillow estimate
-* lotSizeSqFt - any attribute related to an increase in size for a property will have an upward, positive impact on the property value
-* finishedSqFt - just like lot size, any attribute related to an increase in size for a property will have an positive impact on the property value
-* bedrooms - as the number of living spaces increases so will the price of the propety, which leads to positive linear relationship
+* taxAssessment - a larger estimate by the government should equate to a higher Zillow estimate which showcases a positive linear relationship as both entities review similar property values.
+* yearBuilt - as the year built for an address increases to the present day, it will have a positive linear effect on the Zillow estimate.
+* lotSizeSqFt - any attribute related to an increase in size for a property will have an upward, positive impact on the property value.
+* finishedSqFt - just like lot size, any attribute related to an increase in size for a property will have a positive impact on the property value.
+* bedrooms - as the number of living spaces increases so will the price of the property, which leads to positive linear relationship.
 
-The one attribute that I used in the ensemble method but not the linear regression will be the SingleFamily column. I created this new binary column to determine if a lot contains a single family unit but as seen numerious times in the course it is difficult to fit a linear model to a binary attribute. 
+The one attribute that I used in the ensemble method but not the linear regression will be the SingleFamily column. I created this new binary column to determine if a lot contains a single family unit but as seen numerous times in the course it is difficult to fit a linear model to a binary attribute.
 
 Using the same control method of 10 fold cross validation as for the ensemble model, we again use the `caret` package to now create a linear regression model with the same preprocessing steps for each column.
 
@@ -403,7 +403,7 @@ linearRegressionFit <- train(amount ~., data = addressTrain, method = "lm", trCo
 
 # Testing the model predictions
 
-After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurment to determine the fitness of our models and see if they are to rigidly built on the training data, loosely defined where they offer not insight on the response, or somewhere in between. To perform this action, we will apply the `predict` function to each of the models then find the RMSE using the `mean` and `sqrt` functions. The final outcomes of each model will be displayed using the `kable` function. 
+After fitting a bagged tree and linear regression model to our training data, we can now use the 20% of the data we set aside at the beginning to test how well the models can predict the response for new data points. Using the root mean squared error as a measurement to determine the fitness of our models and see if they are to rigidly built on the training data, loosely defined where they offer no insight on the response, or somewhere in between. To perform this action, we will apply the `predict` function to each of the models then find the RMSE using the `mean` and `sqrt` functions. The final outcomes of each model will be displayed using the `kable` function.
 
 ```{r best_fit, echo=TRUE,warning=TRUE,message=FALSE}
 baggedPred <- predict(baggedTreeFit, newdata = dplyr::select(addressTest, -amount))
@@ -420,10 +420,10 @@ knitr::kable(finalCompare)
 
 ## Model Results
 
-From the table above, the bagged tree model has an 8% smaller RMSE than the linear regression model. I initially thought that the linear regression model would be a better fit because many of the predictors appeared to have a linear relationship with the price tag of an address. From an economics design I believed that newer, larger, and more features on an item increased the price tag while a lack of these attributes leads to a decrease in price. However, from my analysis on each attribute and reviewing the plots in the __Attribute cleaning__ section I believe that a combination of these predictors could lead to a decrease in the linear relationship of the response column. The outcome of the RMSE shows that by using the bootstrap method to randomly create a series of trees and calculating the average among all the trees removes the strictness in the model set by the linear realtionship. From our testing the results show that the bagged tree model yields better prediction results for this real world estate problem as a combination of house variables can complicate the value of an address. 
+From the table above, the bagged tree model has an 8% smaller RMSE than the linear regression model. I initially thought that the linear regression model would be a better fit because many of the predictors appeared to have a linear relationship with the price tag of an address. From an economics design I believed that newer, larger, and more features on an item increased the price tag while a lack of these attributes leads to a decrease in price. However, from my analysis on each attribute and reviewing the plots in the __Attribute cleaning__ section I believe that a combination of these predictors could lead to a decrease in the linear relationship of the response column. The outcome of the RMSE shows that by using the bootstrap method to randomly create a series of trees and calculating the average among all the trees removes the strictness in the model set by the linear relationship. From our testing the results show that the bagged tree model yields better prediction results for this real world estate problem as a combination of house variables can complicate the value of an address.
 
 ## Real world application
 
-When it comes to predicting the monetary value of a property everything from the stock market to government enactments can cause the value to change drastically in a single day. However, for our modeling purposes we focused on the data that rarely changes in a single day time and is easily understandable by almost anyone. I coud walk up to anyone and describe to them the size of a house, how much land comes with the property, the number of bedrooms and bathrooms in the home and they would be able to understand these values. Also informing them about what city and state the property is located would give them a reasonable idea about the cost of the home. For example, many people would know the cost of living in California is higher than in New Mexico. Rounding off the information with how much the government appraisal of the property, most individuals would be able to understand and offer their own estimate of a home based on the same information we used in our models. Not only is the data easy to understand but the precitors we reviewed are consistent and have very little fluctuation. How much land allocated to an address will not change between now and tomorrow, neither will the size of a home or the number of rooms. A home can be rebuilt or more land can be purchased from a neighboring property but these pivotal changes take time or happen at such a small rate that it would minimal impact our model prections. 
+When it comes to predicting the monetary value of a property everything from the stock market to government enactments can cause the value to change drastically in a single day. However, for our modeling purposes we focused on the data that rarely changes in a single day time and is easily understandable by almost anyone. I could walk up to anyone and describe to them the size of a house, how much land comes with the property, the number of bedrooms and bathrooms in the home and they would be able to understand these values. Also informing them about what city and state the property is located would give them a reasonable idea about the cost of the home. For example, many people would know the cost of living in California is higher than in New Mexico. Rounding off the information with how much the government appraisal of the property, most individuals would be able to understand and offer their own estimate of a home based on the same information we used in our models. Not only is the data easy to understand but the predictors we reviewed are consistent and have very little fluctuation. How much land allocated to an address will not change between now and tomorrow, neither will the size of a home or the number of rooms. A home can be rebuilt or more land can be purchased from a neighboring property but these pivotal changes take time or happen at such a small rate that it would minimal impact our model predictions.
 
-The models we used to estimate the value of an address with the given predictors would be consistent and easy to interpret when working or presenting them to a wide range of groupes, like real estate agents or new home buyers. However, we could improve our models if we had access to historical data and could add trends or more in depth grouping of home types. The data set we collected had the amount for that given time frame, if we could automate and perform this analysis on a daily bases we could refit our models daily to become more capable of adjusting to trends and having better prediction rates. The models we used are a starting point for predicting the value of a home but we could furhter improve them over time if we had access to other data sets that affect the real world markets and trends that set monetary standards at a global and national stage. 
+The models we used to estimate the value of an address with the given predictors would be consistent and easy to interpret when working or presenting them to a wide range of groups, like real estate agents or new home buyers. However, we could improve our models if we had access to historical data and could add trends or more in-depth grouping of home types. The data set we collected had the amount for that given time frame, if we could automate and perform this analysis on a daily basis we could refit our models daily to become more capable of adjusting to trends and having better prediction rates. The models we used are a starting point for predicting the value of a home but we could further improve them over time if we had access to other data sets that affect the real world markets and trends that set monetary standards at a global and national stage.
